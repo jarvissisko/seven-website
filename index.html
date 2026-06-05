@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seven — Open-Source LTE IoT Platform</title>
+  <meta name="description" content="Seven is an open-source rapid-prototyping platform for LTE-M and NB-IoT cellular IoT applications, built around the Nordic nRF9151 SiP.">
+  <meta property="og:title" content="Seven — Open-Source LTE IoT Platform">
+  <meta property="og:description" content="A compact, open hardware platform for LTE cellular IoT. Built on nRF9151 + Zephyr RTOS. By ID8 Engineering.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:           #0a0a0a;
+      --bg-1:         #0f0f0f;
+      --bg-2:         #141414;
+      --bg-3:         #1a1a1a;
+      --border:       #1e1e1e;
+      --border-2:     #272727;
+      --text:         #f0f0f0;
+      --text-2:       #a0a0a0;
+      --text-3:       #606060;
+      --accent:       #00b4d8;
+      --accent-dim:   #0090b0;
+      --accent-glow:  rgba(0, 180, 216, 0.12);
+      --accent-glow2: rgba(0, 180, 216, 0.06);
+      --green:        #22c55e;
+      --font:         'Inter', system-ui, -apple-system, sans-serif;
+      --mono:         'JetBrains Mono', 'Courier New', monospace;
+      --radius:       10px;
+      --radius-sm:    6px;
+      --nav-h:        60px;
+      --max-w:        1100px;
+    }
+
+    [data-theme="light"] {
+      --bg:           #f8f9fa;
+      --bg-1:         #ffffff;
+      --bg-2:         #f0f1f2;
+      --bg-3:         #e8e9eb;
+      --border:       #e2e3e5;
+      --border-2:     #d5d6d8;
+      --text:         #0f0f0f;
+      --text-2:       #505050;
+      --text-3:       #909090;
+      --accent-glow:  rgba(0, 180, 216, 0.1);
+      --accent-glow2: rgba(0, 180, 216, 0.05);
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ─── Navigation ─────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    [data-theme="light"] .nav { background: rgba(248, 249, 250, 0.9); }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      flex: 1;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-2);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg-3); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-left: auto;
+    }
+    .nav-github {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-2);
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+    .nav-github:hover { color: var(--text); border-color: var(--accent); }
+    .nav-github svg { width: 16px; height: 16px; }
+
+    .theme-btn {
+      background: none;
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--text-2);
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+    .theme-btn:hover { color: var(--text); border-color: var(--accent); }
+
+    /* ─── Hero ───────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      padding: calc(var(--nav-h) + 5rem) 1.5rem 5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(0, 180, 216, 0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+    .hero-title {
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    [data-theme="light"] .hero-title {
+      background: linear-gradient(135deg, #0f0f0f 0%, rgba(0,0,0,0.6) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      max-width: 44ch;
+    }
+    .hero-tagline strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+    .btn-primary:hover { background: #00ccf0; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,180,216,0.3); }
+    .btn-secondary {
+      background: var(--bg-3);
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Board image */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .board-frame {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 4/3;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-2);
+      background: var(--bg-2);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 40px 80px rgba(0,0,0,0.5),
+        0 0 80px var(--accent-glow2);
+    }
+    .board-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .board-frame.no-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* PCB placeholder SVG */
+    .pcb-placeholder {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ─── Specs Strip ─────────────────────────────────────────────────── */
+    .specs-strip {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 1.5rem;
+    }
+    .specs-strip-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      justify-content: space-between;
+    }
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.5rem 1.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .spec-item:first-child { padding-left: 0; }
+    .spec-item:last-child { border-right: none; }
+    .spec-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+    }
+    .spec-value {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+      font-family: var(--mono);
+    }
+
+    /* ─── Sections ───────────────────────────────────────────────────── */
+    section {
+      padding: 6rem 1.5rem;
+    }
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text-2);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── Overview ───────────────────────────────────────────────────── */
+    #overview {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 100%);
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .overview-card {
+      background: var(--bg-1);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+    .overview-card:hover { background: var(--bg-2); }
+    .card-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-glow);
+      border: 1px solid rgba(0,180,216,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.1rem;
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .card-body {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ─── Hardware ───────────────────────────────────────────────────── */
+    #hardware {
+      background: var(--bg-1);
+    }
+    .hw-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .spec-table tbody tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .spec-table tbody tr:last-child { border-bottom: none; }
+    .spec-table td {
+      padding: 0.8rem 0;
+      font-size: 0.875rem;
+    }
+    .spec-table td:first-child {
+      color: var(--text-3);
+      font-weight: 500;
+      width: 45%;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .spec-table td:last-child {
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    .hw-image-col {
+      position: sticky;
+      top: calc(var(--nav-h) + 2rem);
+    }
+    .hw-board-frame {
+      aspect-ratio: 4/3;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border-2);
+      background: var(--bg-2);
+      margin-bottom: 1.5rem;
+    }
+    .hw-board-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .github-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+    .github-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .github-link-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .github-link-content { flex: 1; }
+    .github-link-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .github-link-sub {
+      font-size: 0.78rem;
+      color: var(--text-3);
+      font-family: var(--mono);
+    }
+    .github-link-arrow {
+      color: var(--text-3);
+      font-size: 1rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .github-link:hover .github-link-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ─── Software ───────────────────────────────────────────────────── */
+    #software {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 100%);
+    }
+    .sw-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .sw-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sw-card:hover {
+      border-color: var(--accent);
+      background: var(--bg-3);
+    }
+    .sw-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .sw-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-glow);
+      border: 1px solid rgba(0,180,216,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .sw-card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .sw-card-sub {
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+    .sw-card-body {
+      font-size: 0.84rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+    .sw-tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .sw-tag {
+      font-size: 0.7rem;
+      font-family: var(--mono);
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(0,180,216,0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    /* ─── Expansion ─────────────────────────────────────────────────── */
+    #expansion {
+      background: var(--bg-1);
+    }
+    .expansion-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .expansion-visual {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .mikrobus-diagram {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .click-examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .click-chip {
+      padding: 0.6rem 0.75rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-align: center;
+    }
+    .expansion-content .section-sub { margin-bottom: 1.75rem; }
+
+    .pin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+    .pin-table th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+      border-bottom: 1px solid var(--border-2);
+    }
+    .pin-table td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-2);
+    }
+    .pin-table td:first-child {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-size: 0.78rem;
+    }
+    .pin-table tr:last-child td { border-bottom: none; }
+
+    /* ─── Get Started ────────────────────────────────────────────────── */
+    #get-started {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 50%);
+    }
+    .gs-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .gs-step {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      position: relative;
+    }
+    .gs-step-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--border-2);
+      line-height: 1;
+      margin-bottom: 1rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .gs-step-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .gs-step-body {
+      font-size: 0.84rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+    .gs-step-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .code-block {
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text-2);
+      margin-top: 0.75rem;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .code-block .cmd { color: var(--accent); }
+    .code-block .cmt { color: var(--text-3); }
+
+    .gs-note {
+      background: rgba(0,180,216,0.06);
+      border: 1px solid rgba(0,180,216,0.2);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      font-size: 0.875rem;
+      color: var(--text-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .gs-note-icon { color: var(--accent); font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+    /* ─── Licenses ───────────────────────────────────────────────────── */
+    #licenses {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+    }
+    .license-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .license-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    .license-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(0,180,216,0.25);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .license-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .license-body {
+      font-size: 0.84rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .footer-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .footer-sub {
+      font-size: 0.78rem;
+      color: var(--text-3);
+    }
+    .footer-sub a { color: var(--text-2); }
+    .footer-sub a:hover { color: var(--accent); }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ─── Dividers / Utilities ───────────────────────────────────────── */
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-family: var(--mono);
+      color: var(--green);
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        min-height: auto;
+        padding-top: calc(var(--nav-h) + 3rem);
+      }
+      .hero-visual { order: -1; }
+      .board-frame { max-width: 380px; margin: 0 auto; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .hw-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hw-image-col { position: static; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .expansion-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .gs-steps { grid-template-columns: 1fr; }
+      .license-grid { grid-template-columns: 1fr; }
+      .specs-strip-inner { gap: 0; }
+      .spec-item { border-right: none; border-bottom: 1px solid var(--border); padding: 0.75rem 0; }
+      .spec-item:last-child { border-bottom: none; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-title { font-size: 3.5rem; }
+      .hero-cta { flex-direction: column; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 1rem; }
+    }
+
+    /* ─── Scroll animations ──────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { opacity: 0; }
+    .fade-up.visible {
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .fade-up:nth-child(2) { animation-delay: 0.1s; }
+    .fade-up:nth-child(3) { animation-delay: 0.2s; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────────────────────── -->
+  <nav class="nav" role="navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">SEVEN<span>.</span></a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#expansion">Expansion</a>
+        <a href="#get-started">Get Started</a>
+      </div>
+      <div class="nav-right">
+        <a href="https://github.com/id8-engineering/seven-hardware" class="nav-github" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+          GitHub
+        </a>
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle theme">
+          <span id="themeIcon">☀</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ────────────────────────────────────────────────────── -->
+  <section class="hero" id="top">
+    <div class="hero-content">
+      <div class="hero-badge">Open Hardware · LTE-M / NB-IoT</div>
+      <h1 class="hero-title">SEVEN</h1>
+      <p class="hero-tagline">
+        A compact, open-source rapid-prototyping platform for
+        <strong>LTE cellular IoT</strong> — built on the Nordic nRF9151 SiP,
+        powered by Zephyr RTOS, and designed to get your idea connected fast.
+      </p>
+      <div class="hero-cta">
+        <a href="https://github.com/id8-engineering/seven-hardware" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+          View Hardware on GitHub
+        </a>
+        <a href="#get-started" class="btn btn-secondary">Get Started →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="board-frame no-img" id="boardFrame">
+        <!-- Try the real image first, fall back to SVG placeholder -->
+        <img src="seven_nrf9151.jpg" alt="Seven nRF9151 board"
+             onload="document.getElementById('boardFrame').classList.remove('no-img')"
+             onerror="this.style.display='none'">
+        <!-- PCB Placeholder SVG -->
+        <svg class="pcb-placeholder" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Seven PCB board illustration">
+          <!-- PCB base -->
+          <rect width="480" height="360" fill="#0d1f0d"/>
+          <rect x="1" y="1" width="478" height="358" rx="8" fill="#0f1f0f" stroke="#1a3a1a" stroke-width="1.5"/>
+
+          <!-- Edge routing lines -->
+          <rect x="16" y="16" width="448" height="328" rx="4" fill="none" stroke="#1f4020" stroke-width="1" stroke-dasharray="4 8"/>
+
+          <!-- Main IC (nRF9151) -->
+          <rect x="170" y="130" width="140" height="100" rx="4" fill="#1a1a1a" stroke="#2a4a2a" stroke-width="1.5"/>
+          <text x="240" y="173" font-family="monospace" font-size="11" fill="#4a9a4a" text-anchor="middle" font-weight="600">nRF9151</text>
+          <text x="240" y="189" font-family="monospace" font-size="8" fill="#2a6a2a" text-anchor="middle">SiP-LTE-M/NB-IoT</text>
+          <!-- IC pins left -->
+          <rect x="158" y="140" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="148" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="156" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="164" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="172" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="180" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="188" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="196" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="204" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="212" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <!-- IC pins right -->
+          <rect x="310" y="140" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="148" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="156" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="164" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="172" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="180" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="188" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="196" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="204" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="212" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <!-- IC pins top -->
+          <rect x="183" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="195" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="207" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="219" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="231" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="243" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="255" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="267" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="279" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="291" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <!-- IC pins bottom -->
+          <rect x="183" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="195" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="207" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="219" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="231" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="243" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="255" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="267" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="279" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="291" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+
+          <!-- mikroBUS connector (right side) -->
+          <rect x="380" y="90" width="60" height="180" rx="3" fill="#111" stroke="#2a4a2a" stroke-width="1"/>
+          <text x="410" y="168" font-family="monospace" font-size="8" fill="#2a6a2a" text-anchor="middle" transform="rotate(-90, 410, 168)">mikroBUS</text>
+          <!-- connector pins -->
+          <rect x="372" y="100" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="110" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="120" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="130" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="140" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="150" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="160" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="170" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="180" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="190" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="200" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="210" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="220" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="230" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="240" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="250" width="8" height="4" rx="1" fill="#3a6a3a"/>
+
+          <!-- Power connector (top left) -->
+          <rect x="40" y="40" width="50" height="30" rx="3" fill="#111" stroke="#2a4a2a" stroke-width="1"/>
+          <text x="65" y="60" font-family="monospace" font-size="7" fill="#2a6a2a" text-anchor="middle">6–36V DC</text>
+
+          <!-- USB connector -->
+          <rect x="40" y="90" width="45" height="22" rx="3" fill="#111" stroke="#2a4a2a" stroke-width="1"/>
+          <text x="62" y="105" font-family="monospace" font-size="7" fill="#2a6a2a" text-anchor="middle">USB-C</text>
+
+          <!-- Antenna trace -->
+          <path d="M322 180 L360 180 L360 50 L430 50" stroke="#00b4d8" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity="0.5"/>
+          <text x="430" y="45" font-family="monospace" font-size="7" fill="#00b4d8" opacity="0.6">ANT</text>
+
+          <!-- Trace lines (decorative) -->
+          <path d="M170 180 L120 180 L120 60 L90 60" stroke="#1f4020" stroke-width="1" fill="none"/>
+          <path d="M240 130 L240 90 L140 90 L140 200 L170 200" stroke="#1f4020" stroke-width="1" fill="none"/>
+          <path d="M310 160 L345 160" stroke="#1f4020" stroke-width="1" fill="none"/>
+          <path d="M310 175 L345 175" stroke="#1f4020" stroke-width="1" fill="none"/>
+          <path d="M310 190 L345 190" stroke="#1f4020" stroke-width="1" fill="none"/>
+
+          <!-- LEDs -->
+          <circle cx="100" cy="290" r="6" fill="#00b4d8" opacity="0.7"/>
+          <circle cx="100" cy="290" r="4" fill="#00d4f8" opacity="0.9"/>
+          <text x="112" y="294" font-family="monospace" font-size="7" fill="#2a6a2a">STATUS</text>
+          <circle cx="155" cy="290" r="6" fill="#22c55e" opacity="0.6"/>
+          <circle cx="155" cy="290" r="4" fill="#4ade80" opacity="0.8"/>
+          <text x="167" y="294" font-family="monospace" font-size="7" fill="#2a6a2a">LTE</text>
+
+          <!-- Reset button -->
+          <rect x="95" y="310" width="22" height="22" rx="11" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="1.5"/>
+          <text x="106" y="325" font-family="monospace" font-size="7" fill="#3a6a3a" text-anchor="middle">RST</text>
+
+          <!-- Corner mounting holes -->
+          <circle cx="34" cy="34" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="34" cy="34" r="3" fill="#0d1f0d" stroke="#1a3a1a" stroke-width="1"/>
+          <circle cx="446" cy="34" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="446" cy="34" r="3" fill="#0d1f0d" stroke="#1a3a1a" stroke-width="1"/>
+          <circle cx="34" cy="326" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="34" cy="326" r="3" fill="#0d1f0d" stroke="#1a3a1a" stroke-width="1"/>
+          <circle cx="446" cy="326" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="446" cy="326" r="3" fill="#0d1f0d" stroke="#1a3a1a" stroke-width="1"/>
+
+          <!-- SEVEN silkscreen text -->
+          <text x="240" y="318" font-family="monospace" font-size="10" fill="#3a6a3a" text-anchor="middle" letter-spacing="8" font-weight="700">SEVEN</text>
+          <text x="240" y="330" font-family="monospace" font-size="6.5" fill="#1f4020" text-anchor="middle" letter-spacing="2">by ID8 Engineering</text>
+
+          <!-- Subtle glow on IC -->
+          <rect x="170" y="130" width="140" height="100" rx="4" fill="none" stroke="#00b4d8" stroke-width="0.5" opacity="0.2"/>
+
+          <!-- Decoupling caps (small rectangles near IC) -->
+          <rect x="140" y="138" width="10" height="6" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="140" y="152" width="10" height="6" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="330" y="138" width="10" height="6" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="330" y="152" width="10" height="6" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="195" y="100" width="6" height="10" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="215" y="100" width="6" height="10" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Specs Strip ──────────────────────────────────────────────── -->
+  <div class="specs-strip">
+    <div class="specs-strip-inner">
+      <div class="spec-item">
+        <span class="spec-label">SoC</span>
+        <span class="spec-value">nRF9151</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Core</span>
+        <span class="spec-value">Cortex-M33</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">RAM</span>
+        <span class="spec-value">256 KB</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Flash</span>
+        <span class="spec-value">1 MB</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Connectivity</span>
+        <span class="spec-value">LTE-M / NB-IoT</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Supply</span>
+        <span class="spec-value">6–36 V</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Expansion</span>
+        <span class="spec-value">mikroBUS™</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">RTOS</span>
+        <span class="spec-value">Zephyr</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">License</span>
+        <span class="spec-value">CERN-OHL-P</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Overview ────────────────────────────────────────────────── -->
+  <section id="overview">
+    <div class="section-inner">
+      <p class="section-label">Overview</p>
+      <h2 class="section-title">Built for rapid IoT prototyping</h2>
+      <p class="section-sub">
+        Seven is designed for engineers who need a cellular-connected development platform that doesn't slow them down — from first power-on to deployed prototype in hours, not weeks.
+      </p>
+
+      <div class="overview-grid">
+        <div class="overview-card fade-up">
+          <div class="card-icon">📡</div>
+          <h3 class="card-title">LTE Cellular, out of the box</h3>
+          <p class="card-body">The nRF9151 integrates a full LTE-M and NB-IoT modem with GNSS. No external cellular module, no ribbon cables — just one chip, one antenna, and your application.</p>
+        </div>
+        <div class="overview-card fade-up">
+          <div class="card-icon">🔌</div>
+          <h3 class="card-title">mikroBUS™ expansion</h3>
+          <p class="card-body">A standard mikroBUS socket gives you access to 1,000+ Click Boards from MIKROE — sensors, displays, relays, motor drivers — without writing a single driver from scratch.</p>
+        </div>
+        <div class="overview-card fade-up">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title">Wide-input power</h3>
+          <p class="card-body">6–36 V DC input means Seven works directly from industrial power rails, vehicle batteries, or solar panels — no custom power supply required for your first prototype.</p>
+        </div>
+        <div class="overview-card fade-up">
+          <div class="card-icon">🧱</div>
+          <h3 class="card-title">Zephyr RTOS</h3>
+          <p class="card-body">Nordic's official SDK is built on the Zephyr Project. Real-time kernel, device tree, subsystems for networking, storage, BLE, and a proper build system — from day one.</p>
+        </div>
+        <div class="overview-card fade-up">
+          <div class="card-icon">🔓</div>
+          <h3 class="card-title">Fully open hardware</h3>
+          <p class="card-body">Every schematic, PCB layout, and BOM is published under CERN-OHL-P v2. Fork it, manufacture it, improve it. No secret sauce. No license restrictions on derivatives.</p>
+        </div>
+        <div class="overview-card fade-up">
+          <div class="card-icon">☁️</div>
+          <h3 class="card-title">Cloud-ready from the start</h3>
+          <p class="card-body">Pre-validated integration with AWS IoT Core through nRF Cloud and the nRF9151 modem. TLS 1.2 mutual auth, MQTT, and FOTA — the plumbing is handled.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Hardware ─────────────────────────────────────────────────── -->
+  <section id="hardware">
+    <div class="section-inner">
+      <div class="hw-layout">
+        <div class="hw-spec-col">
+          <p class="section-label">Hardware</p>
+          <h2 class="section-title">Technical Specification</h2>
+          <p class="section-sub">Every design decision in Seven is made with one goal: get your application running with as little friction as possible.</p>
+
+          <table class="spec-table">
+            <tbody>
+              <tr><td>SoC</td><td>Nordic nRF9151-SICA</td></tr>
+              <tr><td>CPU</td><td>ARM Cortex-M33 @ 64 MHz</td></tr>
+              <tr><td>RAM</td><td>256 KB SRAM</td></tr>
+              <tr><td>Flash</td><td>1 MB internal NVM</td></tr>
+              <tr><td>Cellular</td><td>LTE-M / NB-IoT (Cat-M1 / Cat-NB2)</td></tr>
+              <tr><td>GNSS</td><td>Integrated GPS / GNSS</td></tr>
+              <tr><td>Supply voltage</td><td>6–36 V DC (barrel + screw terminal)</td></tr>
+              <tr><td>USB</td><td>USB-C (programming &amp; serial debug)</td></tr>
+              <tr><td>Expansion</td><td>1× mikroBUS™ socket</td></tr>
+              <tr><td>GPIO</td><td>Exposed via header pins</td></tr>
+              <tr><td>Antenna</td><td>U.FL / SMA (external LTE antenna)</td></tr>
+              <tr><td>Debug</td><td>10-pin ARM SWD header</td></tr>
+              <tr><td>LEDs</td><td>Status, LTE activity, user-programmable</td></tr>
+              <tr><td>Reset</td><td>Tactile reset button</td></tr>
+              <tr><td>Dimensions</td><td>To be confirmed</td></tr>
+              <tr><td>PCB layers</td><td>4-layer FR4</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="hw-image-col">
+          <div class="hw-board-frame">
+            <img src="seven_nrf9151.jpg" alt="Seven nRF9151 Development Board"
+                 onerror="this.parentElement.innerHTML='<svg viewBox=\'0 0 480 360\' style=\'width:100%;height:100%\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><rect width=\'480\' height=\'360\' fill=\'#0f1f0f\'/><text x=\'240\' y=\'170\' font-family=\'monospace\' font-size=\'14\' fill=\'#2a6a2a\' text-anchor=\'middle\'>seven_nrf9151.jpg</text><text x=\'240\' y=\'192\' font-family=\'monospace\' font-size=\'10\' fill=\'#1a4a1a\' text-anchor=\'middle\'>board photo</text></svg>'">
+          </div>
+
+          <a href="https://github.com/id8-engineering/seven-hardware" class="github-link" target="_blank" rel="noopener">
+            <div class="github-link-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color: var(--text-2)">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+            </div>
+            <div class="github-link-content">
+              <div class="github-link-title">id8-engineering / seven-hardware</div>
+              <div class="github-link-sub">Schematics, PCB layout, BOM</div>
+            </div>
+            <span class="github-link-arrow">→</span>
+          </a>
+
+          <div style="margin-top: 1rem; padding: 1.25rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius);">
+            <p style="font-size: 0.78rem; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Hardware License</p>
+            <p style="font-size: 0.84rem; color: var(--text-2); line-height: 1.6;">
+              Seven hardware is released under <strong style="color: var(--text)">CERN-OHL-P v2</strong> (Permissive).
+              You are free to use, study, modify, and distribute the design, including in commercial products,
+              with minimal restrictions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Software ─────────────────────────────────────────────────── -->
+  <section id="software">
+    <div class="section-inner">
+      <p class="section-label">Software</p>
+      <h2 class="section-title">A mature stack, from day one</h2>
+      <p class="section-sub">Seven runs on the Nordic nRF Connect SDK — a production-grade, well-documented stack built on top of Zephyr RTOS. Cellular, cloud, OTA — all handled.</p>
+
+      <div class="sw-grid">
+        <div class="sw-card fade-up">
+          <div class="sw-card-header">
+            <div class="sw-icon">🧩</div>
+            <div>
+              <div class="sw-card-title">Zephyr RTOS</div>
+              <div class="sw-card-sub">nRF Connect SDK v2.x</div>
+            </div>
+          </div>
+          <p class="sw-card-body">
+            Nordic's nRF Connect SDK is built on the Zephyr Project — a Linux Foundation open-source RTOS with a rich set of networking, storage, and peripheral drivers. Configured via device tree.
+          </p>
+          <div class="sw-tag-list">
+            <span class="sw-tag">Zephyr 3.x</span>
+            <span class="sw-tag">CMake</span>
+            <span class="sw-tag">west</span>
+            <span class="sw-tag">DTS</span>
+          </div>
+        </div>
+
+        <div class="sw-card fade-up">
+          <div class="sw-card-header">
+            <div class="sw-icon">📶</div>
+            <div>
+              <div class="sw-card-title">LTE Modem</div>
+              <div class="sw-card-sub">Integrated AT command interface</div>
+            </div>
+          </div>
+          <p class="sw-card-body">
+            The nRF9151 modem exposes a standard AT command interface via UART, fully abstracted by the nRF Connect SDK modem library. LTE-M and NB-IoT band configuration, PSM, eDRX — all handled.
+          </p>
+          <div class="sw-tag-list">
+            <span class="sw-tag">LTE-M</span>
+            <span class="sw-tag">NB-IoT</span>
+            <span class="sw-tag">PSM</span>
+            <span class="sw-tag">eDRX</span>
+          </div>
+        </div>
+
+        <div class="sw-card fade-up">
+          <div class="sw-card-header">
+            <div class="sw-icon">☁️</div>
+            <div>
+              <div class="sw-card-title">AWS IoT Core</div>
+              <div class="sw-card-sub">Pre-validated cloud integration</div>
+            </div>
+          </div>
+          <p class="sw-card-body">
+            Publish telemetry, subscribe to commands, and manage device state through AWS IoT Core. Pre-validated with the nRF9151 using MQTT over TLS 1.2 with X.509 mutual authentication.
+          </p>
+          <div class="sw-tag-list">
+            <span class="sw-tag">MQTT</span>
+            <span class="sw-tag">TLS 1.2</span>
+            <span class="sw-tag">X.509</span>
+            <span class="sw-tag">AWS IoT</span>
+          </div>
+        </div>
+
+        <div class="sw-card fade-up">
+          <div class="sw-card-header">
+            <div class="sw-icon">🔄</div>
+            <div>
+              <div class="sw-card-title">OTA Firmware Updates</div>
+              <div class="sw-card-sub">FOTA over LTE</div>
+            </div>
+          </div>
+          <p class="sw-card-body">
+            Firmware-over-the-air (FOTA) updates are built into the nRF Connect SDK. Push new firmware from AWS IoT Jobs or nRF Cloud — devices update securely without physical access.
+          </p>
+          <div class="sw-tag-list">
+            <span class="sw-tag">FOTA</span>
+            <span class="sw-tag">MCUboot</span>
+            <span class="sw-tag">nRF Cloud</span>
+          </div>
+        </div>
+
+        <div class="sw-card fade-up">
+          <div class="sw-card-header">
+            <div class="sw-icon">📍</div>
+            <div>
+              <div class="sw-card-title">GNSS &amp; Location</div>
+              <div class="sw-card-sub">Integrated GPS</div>
+            </div>
+          </div>
+          <p class="sw-card-body">
+            The nRF9151 includes an integrated GNSS receiver. Acquire a GPS fix without additional hardware. Use A-GPS with nRF Cloud for faster time-to-first-fix, even in challenging conditions.
+          </p>
+          <div class="sw-tag-list">
+            <span class="sw-tag">GPS</span>
+            <span class="sw-tag">A-GPS</span>
+            <span class="sw-tag">TTFF</span>
+          </div>
+        </div>
+
+        <div class="sw-card fade-up">
+          <div class="sw-card-header">
+            <div class="sw-icon">🛡️</div>
+            <div>
+              <div class="sw-card-title">Security</div>
+              <div class="sw-card-sub">ARM TrustZone &amp; secure storage</div>
+            </div>
+          </div>
+          <p class="sw-card-body">
+            The Cortex-M33 includes ARM TrustZone technology. nRF9151 adds a hardware-backed key storage and a modem-side TLS stack — credentials never leave the secure enclave in plaintext.
+          </p>
+          <div class="sw-tag-list">
+            <span class="sw-tag">TrustZone</span>
+            <span class="sw-tag">Modem TLS</span>
+            <span class="sw-tag">Key store</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; padding: 1.25rem 1.5rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius); display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; justify-content: space-between;">
+        <div>
+          <p style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem;">Software License</p>
+          <p style="font-size: 0.82rem; color: var(--text-2);">All Seven firmware samples and board support code are released under <strong style="color: var(--text)">Apache License 2.0</strong>.</p>
+        </div>
+        <a href="https://github.com/id8-engineering/seven-hardware" class="btn btn-secondary" target="_blank" rel="noopener" style="white-space: nowrap; flex-shrink: 0;">
+          View Firmware Examples →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Expansion ────────────────────────────────────────────────── -->
+  <section id="expansion">
+    <div class="section-inner">
+      <div class="expansion-layout">
+        <div class="expansion-content">
+          <p class="section-label">Expansion</p>
+          <h2 class="section-title">1,000+ Click Boards, one socket</h2>
+          <p class="section-sub">
+            The mikroBUS™ standard from MIKROE defines a 16-pin interface that covers SPI, I²C, UART, analog, PWM, reset, and power in one connector. Seven includes one full mikroBUS socket.
+          </p>
+
+          <table class="pin-table" style="margin-bottom: 1.5rem;">
+            <thead>
+              <tr>
+                <th>Pin</th>
+                <th>Function</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>AN</td><td>Analog</td><td>Analog input / output</td></tr>
+              <tr><td>RST</td><td>Reset</td><td>Module reset (active low)</td></tr>
+              <tr><td>CS</td><td>SPI Chip Select</td><td>SPI slave select</td></tr>
+              <tr><td>SCK</td><td>SPI Clock</td><td>SPI serial clock</td></tr>
+              <tr><td>MISO</td><td>SPI</td><td>Master in, slave out</td></tr>
+              <tr><td>MOSI</td><td>SPI</td><td>Master out, slave in</td></tr>
+              <tr><td>3.3V / 5V</td><td>Power</td><td>Module supply rail</td></tr>
+              <tr><td>GND</td><td>Ground</td><td>Common ground</td></tr>
+              <tr><td>SDA</td><td>I²C Data</td><td>I²C serial data</td></tr>
+              <tr><td>SCL</td><td>I²C Clock</td><td>I²C serial clock</td></tr>
+              <tr><td>TX</td><td>UART TX</td><td>UART transmit</td></tr>
+              <tr><td>RX</td><td>UART RX</td><td>UART receive</td></tr>
+              <tr><td>INT</td><td>Interrupt</td><td>Module interrupt output</td></tr>
+              <tr><td>PWM</td><td>PWM</td><td>Pulse-width modulation</td></tr>
+            </tbody>
+          </table>
+
+          <p style="font-size: 0.84rem; color: var(--text-2); margin-bottom: 0.75rem;">Example expansion categories:</p>
+          <div class="click-examples">
+            <div class="click-chip">Temperature &amp; Humidity</div>
+            <div class="click-chip">Accelerometer / IMU</div>
+            <div class="click-chip">OLED / Display</div>
+            <div class="click-chip">RS-485 / CAN Bus</div>
+            <div class="click-chip">Relay / I/O expander</div>
+            <div class="click-chip">CO₂ / Air Quality</div>
+            <div class="click-chip">Motor Driver</div>
+            <div class="click-chip">RFID / NFC</div>
+          </div>
+        </div>
+
+        <div class="expansion-visual">
+          <!-- mikroBUS visual -->
+          <svg viewBox="0 0 300 220" class="mikrobus-diagram" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="mikroBUS socket pinout diagram">
+            <!-- Click Board outline -->
+            <rect x="60" y="10" width="180" height="130" rx="8" fill="#111" stroke="#1e1e1e" stroke-width="1.5"/>
+            <text x="150" y="52" font-family="Inter, sans-serif" font-size="10" fill="#505050" text-anchor="middle" font-weight="600">Click Board™</text>
+            <text x="150" y="68" font-family="monospace" font-size="8" fill="#383838" text-anchor="middle">Any of 1,000+</text>
+
+            <!-- Left connector pins (top row) -->
+            <g fill="#1a2a1a">
+              <rect x="40" y="28" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="40" y="42" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="40" y="56" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="40" y="70" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="40" y="84" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="40" y="98" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="40" y="112" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="40" y="126" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+            </g>
+
+            <!-- Right connector pins (bottom row) -->
+            <g>
+              <rect x="240" y="28" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="240" y="42" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="240" y="56" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="240" y="70" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="240" y="84" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="240" y="98" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="240" y="112" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+              <rect x="240" y="126" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+            </g>
+
+            <!-- Pin labels left -->
+            <text x="35" y="34" font-family="monospace" font-size="7" fill="#00b4d8" text-anchor="end">AN</text>
+            <text x="35" y="48" font-family="monospace" font-size="7" fill="#505050" text-anchor="end">RST</text>
+            <text x="35" y="62" font-family="monospace" font-size="7" fill="#00b4d8" text-anchor="end">CS</text>
+            <text x="35" y="76" font-family="monospace" font-size="7" fill="#00b4d8" text-anchor="end">SCK</text>
+            <text x="35" y="90" font-family="monospace" font-size="7" fill="#00b4d8" text-anchor="end">MISO</text>
+            <text x="35" y="104" font-family="monospace" font-size="7" fill="#00b4d8" text-anchor="end">MOSI</text>
+            <text x="35" y="118" font-family="monospace" font-size="7" fill="#22c55e" text-anchor="end">3.3V</text>
+            <text x="35" y="132" font-family="monospace" font-size="7" fill="#505050" text-anchor="end">GND</text>
+
+            <!-- Pin labels right -->
+            <text x="265" y="34" font-family="monospace" font-size="7" fill="#505050">PWM</text>
+            <text x="265" y="48" font-family="monospace" font-size="7" fill="#505050">INT</text>
+            <text x="265" y="62" font-family="monospace" font-size="7" fill="#00b4d8">RX</text>
+            <text x="265" y="76" font-family="monospace" font-size="7" fill="#00b4d8">TX</text>
+            <text x="265" y="90" font-family="monospace" font-size="7" fill="#00b4d8">SCL</text>
+            <text x="265" y="104" font-family="monospace" font-size="7" fill="#00b4d8">SDA</text>
+            <text x="265" y="118" font-family="monospace" font-size="7" fill="#22c55e">5V</text>
+            <text x="265" y="132" font-family="monospace" font-size="7" fill="#505050">GND</text>
+
+            <!-- Arrow down indicating socket on Seven board -->
+            <path d="M150 150 L150 170" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <path d="M146 166 L150 172 L154 166" stroke="#1e1e1e" stroke-width="1.5" fill="none"/>
+
+            <!-- Seven board representation -->
+            <rect x="80" y="175" width="140" height="35" rx="4" fill="#0f1f0f" stroke="#1a3a1a" stroke-width="1"/>
+            <text x="150" y="197" font-family="monospace" font-size="9" fill="#2a6a2a" text-anchor="middle" letter-spacing="4" font-weight="700">SEVEN</text>
+
+            <!-- Label -->
+            <text x="150" y="215" font-family="Inter, sans-serif" font-size="8" fill="#383838" text-anchor="middle">mikroBUS™ socket</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Get Started ──────────────────────────────────────────────── -->
+  <section id="get-started">
+    <div class="section-inner">
+      <p class="section-label">Get Started</p>
+      <h2 class="section-title">From unboxed to LTE in three steps</h2>
+      <p class="section-sub">The quickest path to your first LTE-connected prototype using the nRF Connect SDK and Zephyr.</p>
+
+      <div class="gs-steps">
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">01</div>
+          <h3 class="gs-step-title">Set up the SDK</h3>
+          <p class="gs-step-body">
+            Install the <a href="https://www.nordicsemi.com/Products/Development-software/nRF-Connect-SDK" target="_blank" rel="noopener">nRF Connect SDK</a> using the
+            <a href="https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop" target="_blank" rel="noopener">nRF Connect for Desktop</a> toolchain manager.
+            Installs Zephyr, west, and all required toolchains.
+          </p>
+          <div class="code-block"><span class="cmd">west init -m https://github.com/nrfconnect/sdk-nrf</span>
+<span class="cmd">west update</span></div>
+        </div>
+
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">02</div>
+          <h3 class="gs-step-title">Clone board files</h3>
+          <p class="gs-step-body">
+            The Seven board definition and DTS files live in the hardware repository.
+            Clone it and point your west workspace at the out-of-tree board definition.
+          </p>
+          <div class="code-block"><span class="cmd">git clone https://github.com/id8-engineering/seven-hardware</span>
+<span class="cmt"># Add to west.yml or use BOARD_ROOT</span></div>
+        </div>
+
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">03</div>
+          <h3 class="gs-step-title">Build &amp; flash</h3>
+          <p class="gs-step-body">
+            Build the included <code style="font-family: var(--mono); font-size: 0.8em; color: var(--accent)">asset_tracker</code> sample or start from a minimal hello_nrf9151 application.
+            Flash via USB-C with the nRF Connect Programmer.
+          </p>
+          <div class="code-block"><span class="cmd">west build -b seven_nrf9151 -- -DEXTRA_CONF_FILE=overlay-lte.conf</span>
+<span class="cmd">west flash</span></div>
+        </div>
+      </div>
+
+      <div class="gs-note">
+        <span class="gs-note-icon">ℹ</span>
+        <span>
+          <strong>Documentation and sample applications</strong> are being prepared alongside the hardware release.
+          Watch the <a href="https://github.com/id8-engineering/seven-hardware" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;" target="_blank" rel="noopener">GitHub repository</a> for updates. Early adopters are welcome to open issues and contribute.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Licenses ─────────────────────────────────────────────────── -->
+  <section id="licenses">
+    <div class="section-inner">
+      <p class="section-label">Open Source</p>
+      <h2 class="section-title">Free to use, fork, and build on</h2>
+      <p class="section-sub">Seven is fully open: hardware files and software are published under permissive licenses that allow commercial use without restrictions.</p>
+
+      <div class="license-grid">
+        <div class="license-card">
+          <div class="license-badge">CERN-OHL-P v2</div>
+          <h3 class="license-title">Hardware Design Files</h3>
+          <p class="license-body">
+            All schematics, PCB layout files, Bill of Materials, and mechanical drawings are released under the
+            <strong>CERN Open Hardware Licence v2 — Permissive</strong> (CERN-OHL-P v2).
+            <br><br>
+            You may freely use, copy, modify, and distribute the hardware design, including in commercial products.
+            Attribution to the original source is required, but you are not obligated to share modifications
+            under the same license.
+          </p>
+        </div>
+
+        <div class="license-card">
+          <div class="license-badge">Apache 2.0</div>
+          <h3 class="license-title">Firmware &amp; Software</h3>
+          <p class="license-body">
+            All Seven firmware samples, board support packages, and software tooling are released under the
+            <strong>Apache License, Version 2.0</strong>.
+            <br><br>
+            You may use the software in proprietary applications, distribute it, modify it, and sublicense it.
+            The Apache 2.0 license also provides an express patent grant from all contributors.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ───────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-title">SEVEN</span>
+        <span class="footer-sub">
+          An open-source project by <a href="https://id8-engineering.io" target="_blank" rel="noopener"><img src="data:image/png;base64,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" alt="ID8 Engineering" style="height:48px;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto;"> ID8 Engineering AB</a>
+        </span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/id8-engineering/seven-hardware" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://id8-engineering.io" target="_blank" rel="noopener"><img src="data:image/png;base64,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" alt="ID8 Engineering" style="height:48px;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto;"> ID8 Engineering</a>
+        <a href="https://github.com/id8-engineering/seven-hardware/blob/main/LICENSE" target="_blank" rel="noopener">CERN-OHL-P v2</a>
+        <a href="https://www.nordicsemi.com/Products/nRF9151" target="_blank" rel="noopener">nRF9151 Datasheet</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── JavaScript ───────────────────────────────────────────────── -->
+  <script>
+    // ── Theme toggle ──────────────────────────────────────────────
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    function setTheme(t) {
+      html.setAttribute('data-theme', t);
+      themeIcon.textContent = t === 'dark' ? '☀' : '☽';
+      try { localStorage.setItem('seven-theme', t); } catch(e) {}
+    }
+
+    // Init from storage
+    try {
+      const saved = localStorage.getItem('seven-theme');
+      if (saved) setTheme(saved);
+    } catch(e) {}
+
+    themeBtn.addEventListener('click', () => {
+      setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Intersection Observer for fade-up ─────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Active nav link ───────────────────────────────────────────
+    const sections = document.querySelectorAll('section[id], div[id="top"]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const linkMap = {};
+    navLinks.forEach(a => {
+      const id = a.getAttribute('href').replace('#', '');
+      linkMap[id] = a;
+    });
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(a => a.removeAttribute('style'));
+          if (linkMap[id]) {
+            linkMap[id].style.color = 'var(--accent)';
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
+
+    // ── Nav background on scroll ──────────────────────────────────
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 20
+        ? 'rgba(10,10,10,0.95)'
+        : 'rgba(10,10,10,0.85)';
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
