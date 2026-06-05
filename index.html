@@ -641,6 +641,8 @@
       text-underline-offset: 3px;
     }
     .code-block {
+      word-break: break-all;
+      white-space: pre-wrap;
       background: var(--bg-3);
       border: 1px solid var(--border-2);
       border-radius: var(--radius-sm);
@@ -650,7 +652,6 @@
       color: var(--text-2);
       margin-top: 0.75rem;
       overflow-x: auto;
-      white-space: pre;
     }
     .code-block .cmd { color: var(--accent); }
     .code-block .cmt { color: var(--text-3); }
