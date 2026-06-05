@@ -875,7 +875,131 @@
     </div>
     <div class="hero-visual">
       <div class="board-frame" id="boardFrame">
-        <img src="seven_board.jpg" alt="Seven nRF9151 board render" style="width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(0,180,216,0.08);">
+        <svg class="pcb-placeholder" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Seven PCB board illustration">
+          <!-- PCB base -->
+          <rect width="480" height="360" fill="#0d1f0d"/>
+          <rect x="1" y="1" width="478" height="358" rx="8" fill="#0f1f0f" stroke="#1a3a1a" stroke-width="1.5"/>
+
+          <!-- Edge routing lines -->
+          <rect x="16" y="16" width="448" height="328" rx="4" fill="none" stroke="#1f4020" stroke-width="1" stroke-dasharray="4 8"/>
+
+          <!-- Main IC (nRF9151) -->
+          <rect x="170" y="130" width="140" height="100" rx="4" fill="#1a1a1a" stroke="#2a4a2a" stroke-width="1.5"/>
+          <text x="240" y="173" font-family="monospace" font-size="11" fill="#4a9a4a" text-anchor="middle" font-weight="600">nRF9151</text>
+          <text x="240" y="189" font-family="monospace" font-size="8" fill="#2a6a2a" text-anchor="middle">SiP-LTE-M/NB-IoT</text>
+          <!-- IC pins left -->
+          <rect x="158" y="140" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="148" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="156" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="164" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="172" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="180" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="188" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="196" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="204" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="158" y="212" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <!-- IC pins right -->
+          <rect x="310" y="140" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="148" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="156" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="164" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="172" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="180" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="188" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="196" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="204" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <rect x="310" y="212" width="12" height="3" rx="1" fill="#2a5a2a"/>
+          <!-- IC pins top -->
+          <rect x="183" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="195" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="207" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="219" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="231" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="243" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="255" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="267" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="279" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="291" y="118" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <!-- IC pins bottom -->
+          <rect x="183" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="195" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="207" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="219" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="231" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="243" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="255" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="267" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="279" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+          <rect x="291" y="230" width="3" height="12" rx="1" fill="#2a5a2a"/>
+
+          <!-- mikroBUS connector (right side) -->
+          <rect x="380" y="90" width="60" height="180" rx="3" fill="#111" stroke="#2a4a2a" stroke-width="1"/>
+          <text x="410" y="168" font-family="monospace" font-size="8" fill="#2a6a2a" text-anchor="middle" transform="rotate(-90, 410, 168)">mikroBUS</text>
+          <!-- connector pins -->
+          <rect x="372" y="100" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="110" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="120" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="130" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="140" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="150" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="160" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="170" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="180" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="190" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="200" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="210" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="220" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="230" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="240" width="8" height="4" rx="1" fill="#3a6a3a"/>
+          <rect x="372" y="250" width="8" height="4" rx="1" fill="#3a6a3a"/>
+
+          <!-- Power connector (top left) -->
+          <rect x="40" y="40" width="50" height="30" rx="3" fill="#111" stroke="#2a4a2a" stroke-width="1"/>
+          <text x="65" y="60" font-family="monospace" font-size="7" fill="#2a6a2a" text-anchor="middle">6–36V DC</text>
+
+          <!-- USB connector -->
+          <rect x="40" y="90" width="45" height="22" rx="3" fill="#111" stroke="#2a4a2a" stroke-width="1"/>
+          <text x="62" y="105" font-family="monospace" font-size="7" fill="#2a6a2a" text-anchor="middle">USB-C</text>
+
+          <!-- Traces removed for cleaner look -->
+
+          <!-- LEDs -->
+          <circle cx="100" cy="290" r="6" fill="#00b4d8" opacity="0.7"/>
+          <circle cx="100" cy="290" r="4" fill="#00d4f8" opacity="0.9"/>
+          <text x="112" y="294" font-family="monospace" font-size="7" fill="#2a6a2a">STATUS</text>
+          <circle cx="155" cy="290" r="6" fill="#22c55e" opacity="0.6"/>
+          <circle cx="155" cy="290" r="4" fill="#4ade80" opacity="0.8"/>
+          <text x="167" y="294" font-family="monospace" font-size="7" fill="#2a6a2a">LTE</text>
+
+          <!-- Reset button -->
+          <rect x="95" y="310" width="22" height="22" rx="11" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="1.5"/>
+          <text x="106" y="325" font-family="monospace" font-size="7" fill="#3a6a3a" text-anchor="middle">RST</text>
+
+          <!-- Corner mounting holes -->
+          <circle cx="34" cy="34" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="34" cy="34" r="3" fill="#0d1f0d" stroke="#1a3a1a" stroke-width="1"/>
+          <circle cx="446" cy="34" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="446" cy="34" r="3" fill="#0d1f0d" stroke="#1a3a1a" stroke-width="1"/>
+          <circle cx="34" cy="326" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="34" cy="326" r="3" fill="#0d1f0d" stroke="#1a3a1a" stroke-width="1"/>
+          <circle cx="446" cy="326" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="446" cy="326" r="3" fill="#0d1f0d" stroke="#1a3a1a" stroke-width="1"/>
+
+          <!-- SEVEN silkscreen text -->
+          <text x="240" y="318" font-family="monospace" font-size="10" fill="#3a6a3a" text-anchor="middle" letter-spacing="8" font-weight="700">SEVEN</text>
+          <text x="240" y="330" font-family="monospace" font-size="6.5" fill="#1f4020" text-anchor="middle" letter-spacing="2">by ID8 Engineering</text>
+
+          <!-- Subtle glow on IC -->
+          <rect x="170" y="130" width="140" height="100" rx="4" fill="none" stroke="#00b4d8" stroke-width="0.5" opacity="0.2"/>
+
+          <!-- Decoupling caps (small rectangles near IC) -->
+          <rect x="140" y="138" width="10" height="6" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="140" y="152" width="10" height="6" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="330" y="138" width="10" height="6" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="330" y="152" width="10" height="6" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="195" y="100" width="6" height="10" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="215" y="100" width="6" height="10" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+        </svg>
       </div>
     </div>
   </section>
