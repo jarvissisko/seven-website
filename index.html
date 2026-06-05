@@ -1572,9 +1572,10 @@
     // ── Nav background on scroll ──────────────────────────────────
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
       nav.style.background = window.scrollY > 20
-        ? 'rgba(10,10,10,0.95)'
-        : 'rgba(10,10,10,0.85)';
+        ? (isLight ? 'rgba(248,249,250,0.97)' : 'rgba(10,10,10,0.95)')
+        : (isLight ? 'rgba(248,249,250,0.9)' : 'rgba(10,10,10,0.85)');
     }, { passive: true });
   </script>
 
