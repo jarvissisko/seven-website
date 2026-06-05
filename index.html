@@ -55,6 +55,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     body {
+    overflow-x: hidden;
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
@@ -315,6 +316,10 @@
     .section-inner {
       max-width: var(--max-w);
       margin: 0 auto;
+      overflow: hidden;
+    }
+    section {
+      overflow: hidden;
     }
     .section-label {
       font-size: 0.7rem;
@@ -353,6 +358,7 @@
       overflow: hidden;
     }
     .overview-card {
+      overflow: hidden;
       background: var(--bg-1);
       padding: 2rem;
       transition: background 0.2s;
@@ -474,11 +480,13 @@
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 100%);
     }
     .sw-grid {
+      overflow: hidden;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
     .sw-card {
+      overflow: hidden;
       background: var(--bg-2);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -538,6 +546,7 @@
       background: var(--bg-1);
     }
     .expansion-layout {
+      overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
@@ -605,12 +614,14 @@
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 50%);
     }
     .gs-steps {
+      overflow: hidden;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
       margin-bottom: 3rem;
     }
     .gs-step {
+      overflow: hidden;
       background: var(--bg-2);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -675,11 +686,13 @@
       border-top: 1px solid var(--border);
     }
     .license-grid {
+      overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
     }
     .license-card {
+      overflow: hidden;
       background: var(--bg-2);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -780,10 +793,14 @@
       .overview-grid { grid-template-columns: 1fr; }
       .hw-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .hw-image-col { position: static; }
-      .sw-grid { grid-template-columns: 1fr; }
-      .expansion-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-      .gs-steps { grid-template-columns: 1fr; }
-      .license-grid { grid-template-columns: 1fr; }
+      .sw-grid {
+      overflow: hidden; grid-template-columns: 1fr; }
+      .expansion-layout {
+      overflow: hidden; grid-template-columns: 1fr; gap: 2.5rem; }
+      .gs-steps {
+      overflow: hidden; grid-template-columns: 1fr; }
+      .license-grid {
+      overflow: hidden; grid-template-columns: 1fr; }
       .specs-strip-inner { gap: 0; }
       .spec-item { border-right: none; border-bottom: 1px solid var(--border); padding: 0.75rem 0; }
       .spec-item:last-child { border-bottom: none; }
