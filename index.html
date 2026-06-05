@@ -874,13 +874,8 @@
       </div>
     </div>
     <div class="hero-visual">
-      <div class="board-frame no-img" id="boardFrame">
-        <!-- Try the real image first, fall back to SVG placeholder -->
-        <img src="seven_nrf9151.jpg" alt="Seven nRF9151 board"
-             onload="document.getElementById('boardFrame').classList.remove('no-img')"
-             onerror="this.style.display='none'">
-        <!-- PCB Placeholder SVG -->
-        <img src="seven_board.jpg" alt="Seven nRF9151 IoT board" style="width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(0,180,216,0.08);">
+      <div class="board-frame" id="boardFrame">
+        <img src="seven_board.jpg" alt="Seven nRF9151 board render" style="width:100%;border-radius:8px;box-shadow:0 8px 32px rgba(0,180,216,0.08);">
       </div>
     </div>
   </section>
@@ -1004,8 +999,7 @@
 
         <div class="hw-image-col">
           <div class="hw-board-frame">
-            <img src="seven_nrf9151.jpg" alt="Seven nRF9151 Development Board"
-                 onerror="this.parentElement.innerHTML='<svg viewBox=\'0 0 480 360\' style=\'width:100%;height:100%\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><rect width=\'480\' height=\'360\' fill=\'#0f1f0f\'/><text x=\'240\' y=\'170\' font-family=\'monospace\' font-size=\'14\' fill=\'#2a6a2a\' text-anchor=\'middle\'>seven_nrf9151.jpg</text><text x=\'240\' y=\'192\' font-family=\'monospace\' font-size=\'10\' fill=\'#1a4a1a\' text-anchor=\'middle\'>board photo</text></svg>'">
+            <img src="seven_photo.jpg" alt="Seven nRF9151 Development Board" style="width:100%;border-radius:8px;">
           </div>
 
           <a href="https://github.com/id8-engineering/seven-hardware" class="github-link" target="_blank" rel="noopener">
