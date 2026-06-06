@@ -911,8 +911,7 @@
         <a href="#overview">Overview</a>
         <a href="#hardware">Hardware</a>
         <a href="#software">Software</a>
-        <a href="#expansion">Expansion</a>
-        <a href="#get-started">Get Started</a>
+                <a href="#get-started">Get Started</a>
       </div>
       <div class="nav-right">
         <a href="https://github.com/id8-engineering/seven-hardware" class="nav-github" target="_blank" rel="noopener">
@@ -932,7 +931,6 @@
       <a href="#overview" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Overview</a>
       <a href="#hardware" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Hardware</a>
       <a href="#software" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Software</a>
-      <a href="#expansion" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Expansion</a>
       <a href="#get-started" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Get Started</a>
       <a href="https://github.com/id8-engineering/seven-hardware" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">GitHub ↗</a>
       <button id="mobileThemeToggle" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-2);padding:0.5rem;font-size:0.85rem;cursor:pointer;text-align:left;">Toggle theme</button>
@@ -1127,47 +1125,7 @@
     </div>
   </section>
 
-  <!-- ─── Specs Strip ──────────────────────────────────────────────── -->
-  <div class="specs-strip">
-    <div class="specs-strip-inner">
-      <div class="spec-item">
-        <span class="spec-label">SoC</span>
-        <span class="spec-value">nRF9151</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Core</span>
-        <span class="spec-value">Cortex-M33</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">RAM</span>
-        <span class="spec-value">256 KB</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Flash</span>
-        <span class="spec-value">1 MB</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Connectivity</span>
-        <span class="spec-value">LTE-M / NB-IoT</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Supply</span>
-        <span class="spec-value">6–36 V</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">Expansion</span>
-        <span class="spec-value">mikroBUS™</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">RTOS</span>
-        <span class="spec-value">Zephyr</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-label">License</span>
-        <span class="spec-value">CERN-OHL-P</span>
-      </div>
-    </div>
-  </div>
+  
 
   <!-- ─── Overview ────────────────────────────────────────────────── -->
   <section id="overview">
@@ -1221,6 +1179,28 @@
           <p class="section-label">Hardware</p>
           <h2 class="section-title">Technical Specification</h2>
           <p class="section-sub">Every design decision in Seven is made with one goal: get your application running with as little friction as possible.</p>
+
+          <table class="spec-table">
+            <tbody>
+              <tr><td>SoC</td><td>Nordic nRF9151-SICA</td></tr>
+              <tr><td>CPU</td><td>ARM Cortex-M33 @ 64 MHz</td></tr>
+              <tr><td>RAM</td><td>256 KB SRAM</td></tr>
+              <tr><td>Flash</td><td>1 MB internal NVM</td></tr>
+              <tr><td>Cellular</td><td>LTE-M / NB-IoT (Cat-M1 / Cat-NB2)</td></tr>
+              <tr><td>GNSS</td><td>Integrated GPS / GNSS</td></tr>
+              <tr><td>Supply voltage</td><td>6–36 V DC (barrel + screw terminal)</td></tr>
+              <tr><td>USB</td><td>USB-C (programming &amp; serial debug)</td></tr>
+              <tr><td>Expansion</td><td>1× mikroBUS™ socket</td></tr>
+              <tr><td>GPIO</td><td>Exposed via header pins</td></tr>
+              <tr><td>Antenna</td><td>U.FL / SMA (external LTE antenna)</td></tr>
+              <tr><td>Debug</td><td>10-pin ARM SWD header</td></tr>
+              <tr><td>LEDs</td><td>Status, LTE activity, user-programmable</td></tr>
+              <tr><td>Reset</td><td>Tactile reset button</td></tr>
+              <tr><td>PCB layers</td><td>4-layer FR4</td></tr>
+            </tbody>
+          </table>
+
+
 
           
         </div>
@@ -1389,59 +1369,7 @@
   </section>
 
   <!-- ─── Expansion ────────────────────────────────────────────────── -->
-  <section id="expansion">
-    <div class="section-inner">
-      <div class="expansion-layout">
-        <div class="expansion-content">
-          <p class="section-label">Expansion</p>
-          <h2 class="section-title">1,000+ Click Boards, one socket</h2>
-          <p class="section-sub">
-            The mikroBUS™ standard from MIKROE defines a 16-pin interface that covers SPI, I²C, UART, analog, PWM, reset, and power in one connector. Seven includes one full mikroBUS socket.
-          </p>
-
-          <table class="pin-table" style="margin-bottom: 1.5rem;">
-            <thead>
-              <tr>
-                <th>Pin</th>
-                <th>Function</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>AN</td><td>Analog</td><td>Analog input / output</td></tr>
-              <tr><td>RST</td><td>Reset</td><td>Module reset (active low)</td></tr>
-              <tr><td>CS</td><td>SPI Chip Select</td><td>SPI slave select</td></tr>
-              <tr><td>SCK</td><td>SPI Clock</td><td>SPI serial clock</td></tr>
-              <tr><td>MISO</td><td>SPI</td><td>Master in, slave out</td></tr>
-              <tr><td>MOSI</td><td>SPI</td><td>Master out, slave in</td></tr>
-              <tr><td>3.3V / 5V</td><td>Power</td><td>Module supply rail</td></tr>
-              <tr><td>GND</td><td>Ground</td><td>Common ground</td></tr>
-              <tr><td>SDA</td><td>I²C Data</td><td>I²C serial data</td></tr>
-              <tr><td>SCL</td><td>I²C Clock</td><td>I²C serial clock</td></tr>
-              <tr><td>TX</td><td>UART TX</td><td>UART transmit</td></tr>
-              <tr><td>RX</td><td>UART RX</td><td>UART receive</td></tr>
-              <tr><td>INT</td><td>Interrupt</td><td>Module interrupt output</td></tr>
-              <tr><td>PWM</td><td>PWM</td><td>Pulse-width modulation</td></tr>
-            </tbody>
-          </table>
-
-          <p style="font-size: 0.84rem; color: var(--text-2); margin-bottom: 0.75rem;">Example expansion categories:</p>
-          <div class="click-examples">
-            <div class="click-chip">Temperature &amp; Humidity</div>
-            <div class="click-chip">Accelerometer / IMU</div>
-            <div class="click-chip">OLED / Display</div>
-            <div class="click-chip">RS-485 / CAN Bus</div>
-            <div class="click-chip">Relay / I/O expander</div>
-            <div class="click-chip">CO₂ / Air Quality</div>
-            <div class="click-chip">Motor Driver</div>
-            <div class="click-chip">RFID / NFC</div>
-          </div>
-        </div>
-
-        
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ─── Get Started ──────────────────────────────────────────────── -->
   <section id="get-started">
@@ -1497,40 +1425,7 @@
   </section>
 
   <!-- ─── Licenses ─────────────────────────────────────────────────── -->
-  <section id="licenses">
-    <div class="section-inner">
-      <p class="section-label">Open Source</p>
-      <h2 class="section-title">Free to use, fork, and build on</h2>
-      <p class="section-sub">Seven is fully open: hardware files and software are published under permissive licenses that allow commercial use without restrictions.</p>
-
-      <div class="license-grid">
-        <div class="license-card">
-          <div class="license-badge">CERN-OHL-P v2</div>
-          <h3 class="license-title">Hardware Design Files</h3>
-          <p class="license-body">
-            All schematics, PCB layout files, Bill of Materials, and mechanical drawings are released under the
-            <strong>CERN Open Hardware Licence v2 — Permissive</strong> (CERN-OHL-P v2).
-            <br><br>
-            You may freely use, copy, modify, and distribute the hardware design, including in commercial products.
-            Attribution to the original source is required, but you are not obligated to share modifications
-            under the same license.
-          </p>
-        </div>
-
-        <div class="license-card">
-          <div class="license-badge">Apache 2.0</div>
-          <h3 class="license-title">Firmware &amp; Software</h3>
-          <p class="license-body">
-            All Seven firmware samples, board support packages, and software tooling are released under the
-            <strong>Apache License, Version 2.0</strong>.
-            <br><br>
-            You may use the software in proprietary applications, distribute it, modify it, and sublicense it.
-            The Apache 2.0 license also provides an express patent grant from all contributors.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ─── Footer ───────────────────────────────────────────────────── -->
   <footer>
