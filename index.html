@@ -817,9 +817,10 @@
       /* Hero: text first, image second — stack vertically */
       .hero {
         grid-template-columns: 1fr !important;
-        gap: 2rem;
-        padding-top: calc(var(--nav-h) + 2rem);
-        padding-bottom: 2rem;
+        min-height: auto !important;
+        gap: 1.5rem;
+        padding-top: calc(var(--nav-h) + 1.5rem);
+        padding-bottom: 1.5rem;
       }
       .hero-visual { order: 1; width: 100%; display: flex; justify-content: center; }
       .hero-content { order: 0; }
