@@ -560,9 +560,8 @@
     .expansion-layout {
       overflow: hidden;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      grid-template-columns: 1fr;
+      gap: 2rem;
     }
     .expansion-visual {
       background: var(--bg-2);
@@ -1223,25 +1222,7 @@
           <h2 class="section-title">Technical Specification</h2>
           <p class="section-sub">Every design decision in Seven is made with one goal: get your application running with as little friction as possible.</p>
 
-          <table class="spec-table">
-            <tbody>
-              <tr><td>SoC</td><td>Nordic nRF9151-SICA</td></tr>
-              <tr><td>CPU</td><td>ARM Cortex-M33 @ 64 MHz</td></tr>
-              <tr><td>RAM</td><td>256 KB SRAM</td></tr>
-              <tr><td>Flash</td><td>1 MB internal NVM</td></tr>
-              <tr><td>Cellular</td><td>LTE-M / NB-IoT (Cat-M1 / Cat-NB2)</td></tr>
-              <tr><td>GNSS</td><td>Integrated GPS / GNSS</td></tr>
-              <tr><td>Supply voltage</td><td>6–36 V DC (barrel + screw terminal)</td></tr>
-              <tr><td>USB</td><td>USB-C (programming &amp; serial debug)</td></tr>
-              <tr><td>Expansion</td><td>1× mikroBUS™ socket</td></tr>
-              <tr><td>GPIO</td><td>Exposed via header pins</td></tr>
-              <tr><td>Antenna</td><td>U.FL / SMA (external LTE antenna)</td></tr>
-              <tr><td>Debug</td><td>10-pin ARM SWD header</td></tr>
-              <tr><td>LEDs</td><td>Status, LTE activity, user-programmable</td></tr>
-              <tr><td>Reset</td><td>Tactile reset button</td></tr>
-              <tr><td>PCB layers</td><td>4-layer FR4</td></tr>
-            </tbody>
-          </table>
+          
         </div>
 
         <div class="hw-image-col">
@@ -1457,70 +1438,7 @@
           </div>
         </div>
 
-        <div class="expansion-visual">
-          <!-- mikroBUS visual -->
-          <svg viewBox="0 0 300 240" class="mikrobus-diagram" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="mikroBUS socket pinout diagram">
-            <!-- Click Board outline -->
-            <rect x="60" y="10" width="180" height="130" rx="8" fill="#111" stroke="#1e1e1e" stroke-width="1.5"/>
-            <text x="150" y="52" font-family="Inter, sans-serif" font-size="12" fill="#707070" text-anchor="middle" font-weight="600">Click Board™</text>
-            <text x="150" y="68" font-family="monospace" font-size="10" fill="#585858" text-anchor="middle">Any of 1,000+</text>
-
-            <!-- Left connector pins (top row) -->
-            <g fill="#1a2a1a">
-              <rect x="40" y="28" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="40" y="42" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="40" y="56" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="40" y="70" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="40" y="84" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="40" y="98" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="40" y="112" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="40" y="126" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-            </g>
-
-            <!-- Right connector pins (bottom row) -->
-            <g>
-              <rect x="240" y="28" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="240" y="42" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="240" y="56" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="240" y="70" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="240" y="84" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="240" y="98" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="240" y="112" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-              <rect x="240" y="126" width="20" height="8" rx="2" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
-            </g>
-
-            <!-- Pin labels left -->
-            <text x="35" y="34" font-family="monospace" font-size="11" fill="#00b4d8" text-anchor="end">AN</text>
-            <text x="35" y="48" font-family="monospace" font-size="11" fill="#707070" text-anchor="end">RST</text>
-            <text x="35" y="62" font-family="monospace" font-size="11" fill="#00b4d8" text-anchor="end">CS</text>
-            <text x="35" y="76" font-family="monospace" font-size="11" fill="#00b4d8" text-anchor="end">SCK</text>
-            <text x="35" y="90" font-family="monospace" font-size="11" fill="#00b4d8" text-anchor="end">MISO</text>
-            <text x="35" y="104" font-family="monospace" font-size="11" fill="#00b4d8" text-anchor="end">MOSI</text>
-            <text x="35" y="118" font-family="monospace" font-size="11" fill="#22c55e" text-anchor="end">3.3V</text>
-            <text x="35" y="132" font-family="monospace" font-size="11" fill="#707070" text-anchor="end">GND</text>
-
-            <!-- Pin labels right -->
-            <text x="265" y="34" font-family="monospace" font-size="11" fill="#707070">PWM</text>
-            <text x="265" y="48" font-family="monospace" font-size="11" fill="#707070">INT</text>
-            <text x="265" y="62" font-family="monospace" font-size="11" fill="#00b4d8">RX</text>
-            <text x="265" y="76" font-family="monospace" font-size="11" fill="#00b4d8">TX</text>
-            <text x="265" y="90" font-family="monospace" font-size="11" fill="#00b4d8">SCL</text>
-            <text x="265" y="104" font-family="monospace" font-size="11" fill="#00b4d8">SDA</text>
-            <text x="265" y="118" font-family="monospace" font-size="11" fill="#22c55e">5V</text>
-            <text x="265" y="132" font-family="monospace" font-size="11" fill="#707070">GND</text>
-
-            <!-- Arrow down indicating socket on Seven board -->
-            <path d="M150 150 L150 170" stroke="#1e1e1e" stroke-width="1.5" stroke-dasharray="3 2"/>
-            <path d="M146 166 L150 172 L154 166" stroke="#1e1e1e" stroke-width="1.5" fill="none"/>
-
-            <!-- Seven board representation -->
-            <rect x="80" y="175" width="140" height="35" rx="4" fill="#0f1f0f" stroke="#1a3a1a" stroke-width="1"/>
-            <text x="149" y="197" font-family="monospace" font-size="11" fill="#2a6a2a" text-anchor="middle" letter-spacing="2" font-weight="700">SEVEN</text><text x="170" y="197" font-family="monospace" font-size="11" fill="#00b4d8" font-weight="700">.</text>
-
-            <!-- Label -->
-            <text x="150" y="230" font-family="Inter, sans-serif" font-size="10" fill="#585858" text-anchor="middle">mikroBUS™ socket</text>
-          </svg>
-        </div>
+        
       </div>
     </div>
   </section>
