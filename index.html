@@ -252,10 +252,12 @@
       overflow: visible;
       border: none;
       background: transparent;
+      padding: 20px;
     }
     .board-frame img {
       width: 100%; height: auto;
       object-fit: contain;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)) drop-shadow(0 0 60px rgba(0,180,216,0.06));
     }
     .board-frame.no-img {
       display: flex;
@@ -320,6 +322,12 @@
       overflow: hidden;
     }
     .hero {
+      overflow: visible;
+    }
+    #hardware {
+      overflow: visible;
+    }
+    #hardware .section-inner {
       overflow: visible;
     }
     .section-label {
@@ -428,13 +436,15 @@
     }
     .hw-board-frame {
       border-radius: var(--radius);
-      overflow: hidden;
+      overflow: visible;
       border: none;
       background: transparent;
       margin-bottom: 1.5rem;
+      padding: 20px;
     }
     .hw-board-frame img {
-      width: 100%; height: 100%;
+      width: 100%; height: auto;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)) drop-shadow(0 0 60px rgba(0,180,216,0.06));
       object-fit: cover;
     }
     .github-link {
