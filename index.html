@@ -814,10 +814,11 @@
       .nav-mobile.open { display: flex !important; }
 
       /* Hero: text first, image second — stack vertically */
-      .hero-inner {
+      .hero {
         grid-template-columns: 1fr !important;
-        padding: 2rem 1.25rem;
         gap: 2rem;
+        padding-top: calc(var(--nav-h) + 2rem);
+        padding-bottom: 2rem;
       }
       .hero-visual { order: 1; width: 100%; display: flex; justify-content: center; }
       .hero-content { order: 0; }
