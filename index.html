@@ -908,10 +908,10 @@
     <div class="nav-inner">
       <a href="#" class="nav-logo">SEVEN<span>.</span></a>
       <div class="nav-links">
-        <a href="#overview">Overview</a>
-        <a href="#hardware">Hardware</a>
+                <a href="#hardware">Hardware</a>
         <a href="#software">Software</a>
                 <a href="#get-started">Get Started</a>
+        <a href="#licenses">Open Source</a>
       </div>
       <div class="nav-right">
         <a href="https://github.com/id8-engineering/seven-hardware" class="nav-github" target="_blank" rel="noopener">
@@ -928,10 +928,10 @@
     </div>
     <!-- Mobile nav panel -->
     <div class="nav-mobile" id="mobileNav" style="display:none;flex-direction:column;padding:1rem 1.5rem;gap:0.5rem;background:var(--bg-2);border-bottom:1px solid var(--border);">
-      <a href="#overview" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Overview</a>
       <a href="#hardware" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Hardware</a>
       <a href="#software" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Software</a>
       <a href="#get-started" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Get Started</a>
+      <a href="#licenses" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Open Source</a>
       <a href="https://github.com/id8-engineering/seven-hardware" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">GitHub ↗</a>
       <button id="mobileThemeToggle" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-2);padding:0.5rem;font-size:0.85rem;cursor:pointer;text-align:left;">Toggle theme</button>
     </div>
@@ -1125,51 +1125,63 @@
     </div>
   </section>
 
-  
-
-  <!-- ─── Overview ────────────────────────────────────────────────── -->
-  <section id="overview">
+  <section id="get-started">
     <div class="section-inner">
-      <p class="section-label">Overview</p>
-      <h2 class="section-title">Built for rapid IoT prototyping</h2>
-      <p class="section-sub">
-        Seven is designed for engineers who need a cellular-connected development platform that doesn't slow them down — from first power-on to deployed prototype in hours, not weeks.
-      </p>
+      <p class="section-label">Get Started</p>
+      <h2 class="section-title">From unboxed to LTE in three steps</h2>
+      <p class="section-sub">The quickest path to your first LTE-connected prototype using the nRF Connect SDK and Zephyr.</p>
 
-      <div class="overview-grid">
-        <div class="overview-card fade-up">
-          <div class="card-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M14 18h-4a2 2 0 0 1 -2 -2v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2z"/></svg></div>
-          <h3 class="card-title">LTE Cellular, out of the box</h3>
-          <p class="card-body">The nRF9151 integrates a full LTE-M and NB-IoT modem with GNSS. No external cellular module, no ribbon cables — just one chip, one antenna, and your application.</p>
+      <div class="gs-steps">
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">01</div>
+          <h3 class="gs-step-title">Set up the SDK</h3>
+          <p class="gs-step-body">
+            Install the <a href="https://www.nordicsemi.com/Products/Development-software/nRF-Connect-SDK" target="_blank" rel="noopener">nRF Connect SDK</a> using the
+            <a href="https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop" target="_blank" rel="noopener">nRF Connect for Desktop</a> toolchain manager.
+            Installs Zephyr, west, and all required toolchains.
+          </p>
+          <div class="code-block"><span class="cmd">west init -m https://github.com/nrfconnect/sdk-nrf</span>
+<span class="cmd">west update</span></div>
         </div>
-        <div class="overview-card fade-up">
-          <div class="card-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2v4"/><path d="M12 2v4"/><path d="M17 2v4"/><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 18v4"/><path d="M12 18v4"/><path d="M17 18v4"/></svg></div>
-          <h3 class="card-title">mikroBUS™ expansion</h3>
-          <p class="card-body">A standard mikroBUS socket gives you access to 1,000+ Click Boards from MIKROE — sensors, displays, relays, motor drivers — without writing a single driver from scratch.</p>
+
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">02</div>
+          <h3 class="gs-step-title">Clone board files</h3>
+          <p class="gs-step-body">
+            The Seven board definition and DTS files live in the hardware repository.
+            Clone it and point your west workspace at the out-of-tree board definition.
+          </p>
+          <div class="code-block"><span class="cmd">git clone https://github.com/id8-engineering/seven-hardware</span>
+<span class="cmt"># Add to west.yml or use BOARD_ROOT</span></div>
         </div>
-        <div class="overview-card fade-up">
-          <div class="card-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l-4 10h6l-4 10"/></svg></div>
-          <h3 class="card-title">Wide-input power</h3>
-          <p class="card-body">6–36 V DC input means Seven works directly from industrial power rails, vehicle batteries, or solar panels — no custom power supply required for your first prototype.</p>
+
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">03</div>
+          <h3 class="gs-step-title">Build &amp; flash</h3>
+          <p class="gs-step-body">
+            Build the included <code style="font-family: var(--mono); font-size: 0.8em; color: var(--accent)">asset_tracker</code> sample or start from a minimal hello_nrf9151 application.
+            Flash via USB-C with the nRF Connect Programmer.
+          </p>
+          <div class="code-block"><span class="cmd">west build -b seven_nrf9151 -- -DEXTRA_CONF_FILE=overlay-lte.conf</span>
+<span class="cmd">west flash</span></div>
         </div>
-        <div class="overview-card fade-up">
-          <div class="card-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6l0 .01"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/><path d="M12 12l0 .01"/></svg></div>
-          <h3 class="card-title">Zephyr RTOS</h3>
-          <p class="card-body">Nordic's official SDK is built on the Zephyr Project. Real-time kernel, device tree, subsystems for networking, storage, BLE, and a proper build system — from day one.</p>
-        </div>
-        <div class="overview-card fade-up">
-          <div class="card-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="16" r="1"/><path d="M8 11v-5a4 4 0 0 1 8 0"/></svg></div>
-          <h3 class="card-title">Fully open hardware</h3>
-          <p class="card-body">Every schematic, PCB layout, and BOM is published under CERN-OHL-P v2. Fork it, manufacture it, improve it. No secret sauce. No license restrictions on derivatives.</p>
-        </div>
-        <div class="overview-card fade-up">
-          <div class="card-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.657 18c-2.572 0 -4.657 -2.007 -4.657 -4.483c0 -2.475 2.085 -4.482 4.657 -4.482c.393 -1.762 1.794 -3.2 3.675 -3.773c1.88 -.572 3.956 -.193 5.444 .996c1.488 1.19 2.162 3.007 1.77 4.769h.353c1.946 0 3.101 1.486 3.101 3.344c0 1.857 -1.155 3.629 -3.101 3.629h-11.242z"/></svg></div>
-          <h3 class="card-title">Cloud-ready from the start</h3>
-          <p class="card-body">Pre-validated integration with AWS IoT Core through nRF Cloud and the nRF9151 modem. TLS 1.2 mutual auth, MQTT, and FOTA — the plumbing is handled.</p>
-        </div>
+      </div>
+
+      <div class="gs-note">
+        <span class="gs-note-icon">ℹ</span>
+        <span>
+          <strong>Documentation and sample applications</strong> are being prepared alongside the hardware release.
+          Watch the <a href="https://github.com/id8-engineering/seven-hardware" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;" target="_blank" rel="noopener">GitHub repository</a> for updates. Early adopters are welcome to open issues and contribute.
+        </span>
       </div>
     </div>
   </section>
+
+
+  
+
+  <!-- ─── Overview ────────────────────────────────────────────────── -->
+  
 
   <!-- ─── Hardware ─────────────────────────────────────────────────── -->
   <section id="hardware">
@@ -1372,62 +1384,49 @@
   
 
   <!-- ─── Get Started ──────────────────────────────────────────────── -->
-  <section id="get-started">
-    <div class="section-inner">
-      <p class="section-label">Get Started</p>
-      <h2 class="section-title">From unboxed to LTE in three steps</h2>
-      <p class="section-sub">The quickest path to your first LTE-connected prototype using the nRF Connect SDK and Zephyr.</p>
-
-      <div class="gs-steps">
-        <div class="gs-step fade-up">
-          <div class="gs-step-num">01</div>
-          <h3 class="gs-step-title">Set up the SDK</h3>
-          <p class="gs-step-body">
-            Install the <a href="https://www.nordicsemi.com/Products/Development-software/nRF-Connect-SDK" target="_blank" rel="noopener">nRF Connect SDK</a> using the
-            <a href="https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop" target="_blank" rel="noopener">nRF Connect for Desktop</a> toolchain manager.
-            Installs Zephyr, west, and all required toolchains.
-          </p>
-          <div class="code-block"><span class="cmd">west init -m https://github.com/nrfconnect/sdk-nrf</span>
-<span class="cmd">west update</span></div>
-        </div>
-
-        <div class="gs-step fade-up">
-          <div class="gs-step-num">02</div>
-          <h3 class="gs-step-title">Clone board files</h3>
-          <p class="gs-step-body">
-            The Seven board definition and DTS files live in the hardware repository.
-            Clone it and point your west workspace at the out-of-tree board definition.
-          </p>
-          <div class="code-block"><span class="cmd">git clone https://github.com/id8-engineering/seven-hardware</span>
-<span class="cmt"># Add to west.yml or use BOARD_ROOT</span></div>
-        </div>
-
-        <div class="gs-step fade-up">
-          <div class="gs-step-num">03</div>
-          <h3 class="gs-step-title">Build &amp; flash</h3>
-          <p class="gs-step-body">
-            Build the included <code style="font-family: var(--mono); font-size: 0.8em; color: var(--accent)">asset_tracker</code> sample or start from a minimal hello_nrf9151 application.
-            Flash via USB-C with the nRF Connect Programmer.
-          </p>
-          <div class="code-block"><span class="cmd">west build -b seven_nrf9151 -- -DEXTRA_CONF_FILE=overlay-lte.conf</span>
-<span class="cmd">west flash</span></div>
-        </div>
-      </div>
-
-      <div class="gs-note">
-        <span class="gs-note-icon">ℹ</span>
-        <span>
-          <strong>Documentation and sample applications</strong> are being prepared alongside the hardware release.
-          Watch the <a href="https://github.com/id8-engineering/seven-hardware" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;" target="_blank" rel="noopener">GitHub repository</a> for updates. Early adopters are welcome to open issues and contribute.
-        </span>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ─── Licenses ─────────────────────────────────────────────────── -->
   
 
   <!-- ─── Footer ───────────────────────────────────────────────────── -->
+
+  <section id="licenses">
+    <div class="section-inner">
+      <p class="section-label">Open Source</p>
+      <h2 class="section-title">Free to use, fork, and build on</h2>
+      <p class="section-sub">Seven is fully open: hardware files and software are published under permissive licenses that allow commercial use without restrictions.</p>
+
+      <div class="license-grid">
+        <div class="license-card">
+          <div class="license-badge">CERN-OHL-P v2</div>
+          <h3 class="license-title">Hardware Design Files</h3>
+          <p class="license-body">
+            All schematics, PCB layout files, Bill of Materials, and mechanical drawings are released under the
+            <strong>CERN Open Hardware Licence v2 — Permissive</strong> (CERN-OHL-P v2).
+            <br><br>
+            You may freely use, copy, modify, and distribute the hardware design, including in commercial products.
+            Attribution to the original source is required, but you are not obligated to share modifications
+            under the same license.
+          </p>
+        </div>
+
+        <div class="license-card">
+          <div class="license-badge">Apache 2.0</div>
+          <h3 class="license-title">Firmware &amp; Software</h3>
+          <p class="license-body">
+            All Seven firmware samples, board support packages, and software tooling are released under the
+            <strong>Apache License, Version 2.0</strong>.
+            <br><br>
+            You may use the software in proprietary applications, distribute it, modify it, and sublicense it.
+            The Apache 2.0 license also provides an express patent grant from all contributors.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <footer>
     <div class="footer-inner">
       <div class="footer-left">
