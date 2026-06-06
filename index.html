@@ -364,13 +364,17 @@
     }
     .overview-card:hover { background: var(--bg-2); }
     .card-icon {
-      width: 40px; height: 40px;
+      width: 48px; height: 48px;
       border-radius: var(--radius-sm);
       background: var(--accent-glow);
       border: 1px solid rgba(0,180,216,0.2);
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 1.25rem;
-      font-size: 1.1rem;
+      font-family: monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
     }
     .card-title {
       font-size: 1rem;
@@ -502,11 +506,15 @@
       margin-bottom: 1rem;
     }
     .sw-icon {
-      width: 36px; height: 36px;
+      width: 42px; height: 42px;
       border-radius: var(--radius-sm);
       background: var(--accent-glow);
       border: 1px solid rgba(0,180,216,0.2);
       display: flex; align-items: center; justify-content: center;
+      font-family: monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
       font-size: 1rem;
       flex-shrink: 0;
     }
@@ -1125,32 +1133,32 @@
 
       <div class="overview-grid">
         <div class="overview-card fade-up">
-          <div class="card-icon" style="font-family:monospace;font-size:1.5rem;color:var(--accent);">[RF]</div>
+          <div class="card-icon">[RF]</div>
           <h3 class="card-title">LTE Cellular, out of the box</h3>
           <p class="card-body">The nRF9151 integrates a full LTE-M and NB-IoT modem with GNSS. No external cellular module, no ribbon cables — just one chip, one antenna, and your application.</p>
         </div>
         <div class="overview-card fade-up">
-          <div class="card-icon" style="font-family:monospace;font-size:1.5rem;color:var(--accent);">[BUS]</div>
+          <div class="card-icon">[BUS]</div>
           <h3 class="card-title">mikroBUS™ expansion</h3>
           <p class="card-body">A standard mikroBUS socket gives you access to 1,000+ Click Boards from MIKROE — sensors, displays, relays, motor drivers — without writing a single driver from scratch.</p>
         </div>
         <div class="overview-card fade-up">
-          <div class="card-icon" style="font-family:monospace;font-size:1.5rem;color:var(--accent);">[PWR]</div>
+          <div class="card-icon">[PWR]</div>
           <h3 class="card-title">Wide-input power</h3>
           <p class="card-body">6–36 V DC input means Seven works directly from industrial power rails, vehicle batteries, or solar panels — no custom power supply required for your first prototype.</p>
         </div>
         <div class="overview-card fade-up">
-          <div class="card-icon" style="font-family:monospace;font-size:1.5rem;color:var(--accent);">[OS]</div>
+          <div class="card-icon">[OS]</div>
           <h3 class="card-title">Zephyr RTOS</h3>
           <p class="card-body">Nordic's official SDK is built on the Zephyr Project. Real-time kernel, device tree, subsystems for networking, storage, BLE, and a proper build system — from day one.</p>
         </div>
         <div class="overview-card fade-up">
-          <div class="card-icon" style="font-family:monospace;font-size:1.5rem;color:var(--accent);">[OHW]</div>
+          <div class="card-icon">[OHW]</div>
           <h3 class="card-title">Fully open hardware</h3>
           <p class="card-body">Every schematic, PCB layout, and BOM is published under CERN-OHL-P v2. Fork it, manufacture it, improve it. No secret sauce. No license restrictions on derivatives.</p>
         </div>
         <div class="overview-card fade-up">
-          <div class="card-icon" style="font-family:monospace;font-size:1.5rem;color:var(--accent);">[IOT]</div>
+          <div class="card-icon">[IOT]</div>
           <h3 class="card-title">Cloud-ready from the start</h3>
           <p class="card-body">Pre-validated integration with AWS IoT Core through nRF Cloud and the nRF9151 modem. TLS 1.2 mutual auth, MQTT, and FOTA — the plumbing is handled.</p>
         </div>
@@ -1229,7 +1237,7 @@
       <div class="sw-grid">
         <div class="sw-card fade-up">
           <div class="sw-card-header">
-            <div class="sw-icon" style="font-family:monospace;font-size:1.2rem;color:var(--accent);">[SDK]</div>
+            <div class="sw-icon">[SDK]</div>
             <div>
               <div class="sw-card-title">Zephyr RTOS</div>
               <div class="sw-card-sub">nRF Connect SDK v2.x</div>
@@ -1248,7 +1256,7 @@
 
         <div class="sw-card fade-up">
           <div class="sw-card-header">
-            <div class="sw-icon" style="font-family:monospace;font-size:1.2rem;color:var(--accent);">[LTE]</div>
+            <div class="sw-icon">[LTE]</div>
             <div>
               <div class="sw-card-title">LTE Modem</div>
               <div class="sw-card-sub">Integrated AT command interface</div>
@@ -1267,7 +1275,7 @@
 
         <div class="sw-card fade-up">
           <div class="sw-card-header">
-            <div class="sw-icon" style="font-family:monospace;font-size:1.2rem;color:var(--accent);">[AWS]</div>
+            <div class="sw-icon">[AWS]</div>
             <div>
               <div class="sw-card-title">AWS IoT Core</div>
               <div class="sw-card-sub">Pre-validated cloud integration</div>
@@ -1286,7 +1294,7 @@
 
         <div class="sw-card fade-up">
           <div class="sw-card-header">
-            <div class="sw-icon" style="font-family:monospace;font-size:1.2rem;color:var(--accent);">[OTA]</div>
+            <div class="sw-icon">[OTA]</div>
             <div>
               <div class="sw-card-title">OTA Firmware Updates</div>
               <div class="sw-card-sub">FOTA over LTE</div>
