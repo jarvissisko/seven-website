@@ -908,8 +908,8 @@
     <div class="nav-inner">
       <a href="#" class="nav-logo">SEVEN<span>.</span></a>
       <div class="nav-links">
-                <a href="#hardware">Hardware</a>
-        <a href="#software">Software</a>
+                <a href="#software">Software</a>
+        <a href="#hardware">Hardware</a>
                 <a href="#get-started">Get Started</a>
         <a href="#licenses">Open Source</a>
       </div>
@@ -928,8 +928,8 @@
     </div>
     <!-- Mobile nav panel -->
     <div class="nav-mobile" id="mobileNav" style="display:none;flex-direction:column;padding:1rem 1.5rem;gap:0.5rem;background:var(--bg-2);border-bottom:1px solid var(--border);">
-      <a href="#hardware" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Hardware</a>
       <a href="#software" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Software</a>
+      <a href="#hardware" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Hardware</a>
       <a href="#get-started" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Get Started</a>
       <a href="#licenses" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Open Source</a>
       <a href="https://github.com/id8-engineering/seven-hardware" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">GitHub ↗</a>
@@ -1184,71 +1184,22 @@
   
 
   <!-- ─── Hardware ─────────────────────────────────────────────────── -->
-  <section id="hardware">
-    <div class="section-inner">
-      <div class="hw-layout">
-        <div class="hw-spec-col">
-          <p class="section-label">Hardware</p>
-          <h2 class="section-title">Technical Specification</h2>
-          <p class="section-sub">Every design decision in Seven is made with one goal: get your application running with as little friction as possible.</p>
-
-          <table class="spec-table">
-            <tbody>
-              <tr><td>SoC</td><td>Nordic nRF9151-SICA</td></tr>
-              <tr><td>CPU</td><td>ARM Cortex-M33 @ 64 MHz</td></tr>
-              <tr><td>RAM</td><td>256 KB SRAM</td></tr>
-              <tr><td>Flash</td><td>1 MB internal NVM</td></tr>
-              <tr><td>Cellular</td><td>LTE-M / NB-IoT (Cat-M1 / Cat-NB2)</td></tr>
-              <tr><td>GNSS</td><td>Integrated GPS / GNSS</td></tr>
-              <tr><td>Supply voltage</td><td>6–36 V DC (barrel + screw terminal)</td></tr>
-              <tr><td>USB</td><td>USB-C (programming &amp; serial debug)</td></tr>
-              <tr><td>Expansion</td><td>1× mikroBUS™ socket</td></tr>
-              <tr><td>GPIO</td><td>Exposed via header pins</td></tr>
-              <tr><td>Antenna</td><td>U.FL / SMA (external LTE antenna)</td></tr>
-              <tr><td>Debug</td><td>10-pin ARM SWD header</td></tr>
-              <tr><td>LEDs</td><td>Status, LTE activity, user-programmable</td></tr>
-              <tr><td>Reset</td><td>Tactile reset button</td></tr>
-              <tr><td>PCB layers</td><td>4-layer FR4</td></tr>
-            </tbody>
-          </table>
-
-
-
-          
-        </div>
-
-        <div class="hw-image-col">
-          <div class="hw-board-frame">
-            <img src="seven_photo.png" alt="Seven nRF9151 Development Board" style="width:100%;border-radius:8px;">
-          </div>
-
-          <a href="https://github.com/id8-engineering/seven-hardware" class="github-link" target="_blank" rel="noopener">
-            <div class="github-link-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color: var(--text-2)">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
-              </svg>
-            </div>
-            <div class="github-link-content">
-              <div class="github-link-title">id8-engineering / seven-hardware</div>
-              <div class="github-link-sub">Schematics, PCB layout, BOM</div>
-            </div>
-            <span class="github-link-arrow">→</span>
-          </a>
-
-          <div style="margin-top: 1rem; padding: 1.25rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius);">
-            <p style="font-size: 0.78rem; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Hardware License</p>
-            <p style="font-size: 0.84rem; color: var(--text-2); line-height: 1.6;">
-              Seven hardware is released under <strong style="color: var(--text)">CERN-OHL-P v2</strong> (Permissive).
-              You are free to use, study, modify, and distribute the design, including in commercial products,
-              with minimal restrictions.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ─── Software ─────────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Expansion ────────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Get Started ──────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Licenses ─────────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Footer ───────────────────────────────────────────────────── -->
+
   <section id="software">
     <div class="section-inner">
       <p class="section-label">Software</p>
@@ -1380,16 +1331,69 @@
     </div>
   </section>
 
-  <!-- ─── Expansion ────────────────────────────────────────────────── -->
-  
+  <section id="hardware">
+    <div class="section-inner">
+      <div class="hw-layout">
+        <div class="hw-spec-col">
+          <p class="section-label">Hardware</p>
+          <h2 class="section-title">Technical Specification</h2>
+          <p class="section-sub">Every design decision in Seven is made with one goal: get your application running with as little friction as possible.</p>
 
-  <!-- ─── Get Started ──────────────────────────────────────────────── -->
-  
+          <table class="spec-table">
+            <tbody>
+              <tr><td>SoC</td><td>Nordic nRF9151-SICA</td></tr>
+              <tr><td>CPU</td><td>ARM Cortex-M33 @ 64 MHz</td></tr>
+              <tr><td>RAM</td><td>256 KB SRAM</td></tr>
+              <tr><td>Flash</td><td>1 MB internal NVM</td></tr>
+              <tr><td>Cellular</td><td>LTE-M / NB-IoT (Cat-M1 / Cat-NB2)</td></tr>
+              <tr><td>GNSS</td><td>Integrated GPS / GNSS</td></tr>
+              <tr><td>Supply voltage</td><td>6–36 V DC (barrel + screw terminal)</td></tr>
+              <tr><td>USB</td><td>USB-C (programming &amp; serial debug)</td></tr>
+              <tr><td>Expansion</td><td>1× mikroBUS™ socket</td></tr>
+              <tr><td>GPIO</td><td>Exposed via header pins</td></tr>
+              <tr><td>Antenna</td><td>U.FL / SMA (external LTE antenna)</td></tr>
+              <tr><td>Debug</td><td>10-pin ARM SWD header</td></tr>
+              <tr><td>LEDs</td><td>Status, LTE activity, user-programmable</td></tr>
+              <tr><td>Reset</td><td>Tactile reset button</td></tr>
+              <tr><td>PCB layers</td><td>4-layer FR4</td></tr>
+            </tbody>
+          </table>
 
-  <!-- ─── Licenses ─────────────────────────────────────────────────── -->
-  
 
-  <!-- ─── Footer ───────────────────────────────────────────────────── -->
+
+          
+        </div>
+
+        <div class="hw-image-col">
+          <div class="hw-board-frame">
+            <img src="seven_photo.png" alt="Seven nRF9151 Development Board" style="width:100%;border-radius:8px;">
+          </div>
+
+          <a href="https://github.com/id8-engineering/seven-hardware" class="github-link" target="_blank" rel="noopener">
+            <div class="github-link-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color: var(--text-2)">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+            </div>
+            <div class="github-link-content">
+              <div class="github-link-title">id8-engineering / seven-hardware</div>
+              <div class="github-link-sub">Schematics, PCB layout, BOM</div>
+            </div>
+            <span class="github-link-arrow">→</span>
+          </a>
+
+          <div style="margin-top: 1rem; padding: 1.25rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius);">
+            <p style="font-size: 0.78rem; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Hardware License</p>
+            <p style="font-size: 0.84rem; color: var(--text-2); line-height: 1.6;">
+              Seven hardware is released under <strong style="color: var(--text)">CERN-OHL-P v2</strong> (Permissive).
+              You are free to use, study, modify, and distribute the design, including in commercial products,
+              with minimal restrictions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="licenses">
     <div class="section-inner">
