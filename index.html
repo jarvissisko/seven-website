@@ -207,6 +207,7 @@
       color: var(--text-3);
       margin-top: 0.75rem;
       opacity: 0.6;
+      text-align: center;
     }
     .boot > * { grid-area: 1/1; }
 
@@ -1048,10 +1049,7 @@
 
       <p class="hero-specs">nRF9151 · Cortex-M33 · 256 KB · LTE-M / NB-IoT · mikroBUS™ · CERN-OHL-P</p>
 
-      <div class="boot" id="bootStrip">
-        <span class="connecting">Connecting<span class="dot">…</span>&nbsp;&nbsp;<span class="bar b1">▮</span><span class="bar b2">▮</span><span class="bar b3">▮</span></span>
-        <span class="online"><span class="telemetry">LTE-M · −87 dBm</span>&nbsp;&nbsp;<span class="gps">GPS lock · 7 sats</span>&nbsp;&nbsp;<span class="live"><span class="dot">●</span> online</span></span>
-      </div>
+      
     </div>
     <div class="hero-visual">
       <div class="board-frame" id="boardFrame">
@@ -1215,6 +1213,10 @@
           <text x="298" y="325" font-family="monospace" font-size="14" fill="#4a8a4a" text-anchor="middle" letter-spacing="2" font-weight="700">SEVEN</text><circle cx="325" cy="324" r="1.5" fill="#00b4d8" class="led-status"/>
           <text x="300" y="345" font-family="monospace" font-size="9" fill="#3a8a3a" text-anchor="middle" letter-spacing="2">by ID8 Engineering</text>
         </svg>
+      </div>
+      <div class="boot" id="bootStrip">
+        <span class="connecting">Connecting<span class="dot">…</span>&nbsp;&nbsp;<span class="bar b1">▮</span><span class="bar b2">▮</span><span class="bar b3">▮</span></span>
+        <span class="online"><span class="telemetry">LTE-M · −87 dBm</span>&nbsp;&nbsp;<span class="gps">GPS lock · 7 sats</span>&nbsp;&nbsp;<span class="live"><span class="dot">●</span> online</span></span>
       </div>
     </div>
   </section>
