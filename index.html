@@ -923,9 +923,9 @@
     <div class="nav-inner">
       <a href="#" class="nav-logo">SEVEN<span class="seven-dot">.</span></a>
       <div class="nav-links">
-        <a href="#get-started">Get Started</a>
-        <a href="#software">Software</a>
         <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#get-started">Get Started</a>
         <a href="#licenses">Open Source</a>
       </div>
       <div class="nav-right">
@@ -943,9 +943,9 @@
     </div>
     <!-- Mobile nav panel -->
     <div class="nav-mobile" id="mobileNav" style="display:none;flex-direction:column;padding:1rem 1.5rem;gap:0.5rem;background:var(--bg-2);border-bottom:1px solid var(--border);">
-      <a href="#get-started" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Get Started</a>
-      <a href="#software" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Software</a>
       <a href="#hardware" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Hardware</a>
+      <a href="#software" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Software</a>
+      <a href="#get-started" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Get Started</a>
       <a href="#licenses" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Open Source</a>
       <a href="https://github.com/id8-engineering/seven-hardware" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">GitHub ↗</a>
       <button id="mobileThemeToggle" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-2);padding:0.5rem;font-size:0.85rem;cursor:pointer;text-align:left;">Toggle theme</button>
@@ -1140,80 +1140,52 @@
     </div>
   </section>
 
-  <section id="get-started">
+  <section id="hardware">
     <div class="section-inner">
-      <p class="section-label">Get Started</p>
-      <h2 class="section-title">From unboxed to LTE in three steps</h2>
-      <p class="section-sub">The quickest path to your first LTE-connected prototype using the nRF Connect SDK and Zephyr.</p>
+      <div class="hw-layout">
+        <div class="hw-spec-col">
+          <p class="section-label">Hardware</p>
+          <h2 class="section-title">Technical Specification</h2>
+          <p class="section-sub">Every design decision in Seven is made with one goal: get your application running with as little friction as possible.</p>
 
-      <div class="gs-steps">
-        <div class="gs-step fade-up">
-          <div class="gs-step-num">01</div>
-          <h3 class="gs-step-title">Set up the SDK</h3>
-          <p class="gs-step-body">
-            Install the <a href="https://www.nordicsemi.com/Products/Development-software/nRF-Connect-SDK" target="_blank" rel="noopener">nRF Connect SDK</a> using the
-            <a href="https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop" target="_blank" rel="noopener">nRF Connect for Desktop</a> toolchain manager.
-            Installs Zephyr, west, and all required toolchains.
-          </p>
-          <div class="code-block"><span class="cmd">west init -m https://github.com/nrfconnect/sdk-nrf</span>
-<span class="cmd">west update</span></div>
+          <table class="spec-table">
+            <tbody>
+              <tr><td>SoC</td><td>Nordic nRF9151 — Cortex-M33 @ 64 MHz, 256 KB RAM, 1 MB flash</td></tr>
+              <tr><td>Cellular</td><td>LTE-M / NB-IoT with integrated GNSS</td></tr>
+              <tr><td>Power</td><td>6–36 V DC (barrel + screw terminal)</td></tr>
+              <tr><td>Expansion</td><td>2× mikroBUS™ sockets (1,000+ Click Boards)</td></tr>
+              <tr><td>Interfaces</td><td>USB-C, SWD debug, SMA antenna, GPIO headers</td></tr>
+            </tbody>
+          </table>
+
+
+
+          
         </div>
 
-        <div class="gs-step fade-up">
-          <div class="gs-step-num">02</div>
-          <h3 class="gs-step-title">Clone board files</h3>
-          <p class="gs-step-body">
-            The Seven board definition and DTS files live in the hardware repository.
-            Clone it and point your west workspace at the out-of-tree board definition.
-          </p>
-          <div class="code-block"><span class="cmd">git clone https://github.com/id8-engineering/seven-hardware</span>
-<span class="cmt"># Add to west.yml or use BOARD_ROOT</span></div>
-        </div>
+        <div class="hw-image-col">
+          <div class="hw-board-frame">
+            <img src="seven_photo.png" alt="Seven nRF9151 Development Board" style="width:100%;border-radius:8px;">
+          </div>
 
-        <div class="gs-step fade-up">
-          <div class="gs-step-num">03</div>
-          <h3 class="gs-step-title">Build &amp; flash</h3>
-          <p class="gs-step-body">
-            Build the included <code style="font-family: var(--mono); font-size: 0.8em; color: var(--accent)">asset_tracker</code> sample or start from a minimal hello_nrf9151 application.
-            Flash via USB-C with the nRF Connect Programmer.
-          </p>
-          <div class="code-block"><span class="cmd">west build -b seven_nrf9151 -- -DEXTRA_CONF_FILE=overlay-lte.conf</span>
-<span class="cmd">west flash</span></div>
-        </div>
-      </div>
+          <a href="https://github.com/id8-engineering/seven-hardware" class="github-link" target="_blank" rel="noopener">
+            <div class="github-link-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color: var(--text-2)">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+            </div>
+            <div class="github-link-content">
+              <div class="github-link-title">id8-engineering / seven-hardware</div>
+              <div class="github-link-sub">Schematics, PCB layout, BOM</div>
+            </div>
+            <span class="github-link-arrow">→</span>
+          </a>
 
-      <div class="gs-note">
-        <span class="gs-note-icon">ℹ</span>
-        <span>
-          <strong>Documentation and sample applications</strong> are being prepared alongside the hardware release.
-          Watch the <a href="https://github.com/id8-engineering/seven-hardware" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;" target="_blank" rel="noopener">GitHub repository</a> for updates. Early adopters are welcome to open issues and contribute.
-        </span>
+
+        </div>
       </div>
     </div>
   </section>
-
-
-  
-
-  <!-- ─── Overview ────────────────────────────────────────────────── -->
-  
-
-  <!-- ─── Hardware ─────────────────────────────────────────────────── -->
-  
-
-  <!-- ─── Software ─────────────────────────────────────────────────── -->
-  
-
-  <!-- ─── Expansion ────────────────────────────────────────────────── -->
-  
-
-  <!-- ─── Get Started ──────────────────────────────────────────────── -->
-  
-
-  <!-- ─── Licenses ─────────────────────────────────────────────────── -->
-  
-
-  <!-- ─── Footer ───────────────────────────────────────────────────── -->
 
   <section id="software">
     <div class="section-inner">
@@ -1343,49 +1315,54 @@
     </div>
   </section>
 
-  <section id="hardware">
+  <section id="get-started">
     <div class="section-inner">
-      <div class="hw-layout">
-        <div class="hw-spec-col">
-          <p class="section-label">Hardware</p>
-          <h2 class="section-title">Technical Specification</h2>
-          <p class="section-sub">Every design decision in Seven is made with one goal: get your application running with as little friction as possible.</p>
+      <p class="section-label">Get Started</p>
+      <h2 class="section-title">From unboxed to LTE in three steps</h2>
+      <p class="section-sub">The quickest path to your first LTE-connected prototype using the nRF Connect SDK and Zephyr.</p>
 
-          <table class="spec-table">
-            <tbody>
-              <tr><td>SoC</td><td>Nordic nRF9151 — Cortex-M33 @ 64 MHz, 256 KB RAM, 1 MB flash</td></tr>
-              <tr><td>Cellular</td><td>LTE-M / NB-IoT with integrated GNSS</td></tr>
-              <tr><td>Power</td><td>6–36 V DC (barrel + screw terminal)</td></tr>
-              <tr><td>Expansion</td><td>2× mikroBUS™ sockets (1,000+ Click Boards)</td></tr>
-              <tr><td>Interfaces</td><td>USB-C, SWD debug, SMA antenna, GPIO headers</td></tr>
-            </tbody>
-          </table>
-
-
-
-          
+      <div class="gs-steps">
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">01</div>
+          <h3 class="gs-step-title">Set up the SDK</h3>
+          <p class="gs-step-body">
+            Install the <a href="https://www.nordicsemi.com/Products/Development-software/nRF-Connect-SDK" target="_blank" rel="noopener">nRF Connect SDK</a> using the
+            <a href="https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop" target="_blank" rel="noopener">nRF Connect for Desktop</a> toolchain manager.
+            Installs Zephyr, west, and all required toolchains.
+          </p>
+          <div class="code-block"><span class="cmd">west init -m https://github.com/nrfconnect/sdk-nrf</span>
+<span class="cmd">west update</span></div>
         </div>
 
-        <div class="hw-image-col">
-          <div class="hw-board-frame">
-            <img src="seven_photo.png" alt="Seven nRF9151 Development Board" style="width:100%;border-radius:8px;">
-          </div>
-
-          <a href="https://github.com/id8-engineering/seven-hardware" class="github-link" target="_blank" rel="noopener">
-            <div class="github-link-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color: var(--text-2)">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
-              </svg>
-            </div>
-            <div class="github-link-content">
-              <div class="github-link-title">id8-engineering / seven-hardware</div>
-              <div class="github-link-sub">Schematics, PCB layout, BOM</div>
-            </div>
-            <span class="github-link-arrow">→</span>
-          </a>
-
-
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">02</div>
+          <h3 class="gs-step-title">Clone board files</h3>
+          <p class="gs-step-body">
+            The Seven board definition and DTS files live in the hardware repository.
+            Clone it and point your west workspace at the out-of-tree board definition.
+          </p>
+          <div class="code-block"><span class="cmd">git clone https://github.com/id8-engineering/seven-hardware</span>
+<span class="cmt"># Add to west.yml or use BOARD_ROOT</span></div>
         </div>
+
+        <div class="gs-step fade-up">
+          <div class="gs-step-num">03</div>
+          <h3 class="gs-step-title">Build &amp; flash</h3>
+          <p class="gs-step-body">
+            Build the included <code style="font-family: var(--mono); font-size: 0.8em; color: var(--accent)">asset_tracker</code> sample or start from a minimal hello_nrf9151 application.
+            Flash via USB-C with the nRF Connect Programmer.
+          </p>
+          <div class="code-block"><span class="cmd">west build -b seven_nrf9151 -- -DEXTRA_CONF_FILE=overlay-lte.conf</span>
+<span class="cmd">west flash</span></div>
+        </div>
+      </div>
+
+      <div class="gs-note">
+        <span class="gs-note-icon">ℹ</span>
+        <span>
+          <strong>Documentation and sample applications</strong> are being prepared alongside the hardware release.
+          Watch the <a href="https://github.com/id8-engineering/seven-hardware" style="color: var(--accent); text-decoration: underline; text-underline-offset: 3px;" target="_blank" rel="noopener">GitHub repository</a> for updates. Early adopters are welcome to open issues and contribute.
+        </span>
       </div>
     </div>
   </section>
@@ -1424,6 +1401,38 @@
       </div>
     </div>
   </section>
+
+
+  
+
+
+  
+
+  <!-- ─── Overview ────────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Hardware ─────────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Software ─────────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Expansion ────────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Get Started ──────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Licenses ─────────────────────────────────────────────────── -->
+  
+
+  <!-- ─── Footer ───────────────────────────────────────────────────── -->
+
+  
+
+  
+
+  
 
 
   <footer>
