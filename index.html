@@ -162,6 +162,43 @@
       gap: 4rem;
       align-items: center;
     }
+    .hero { position: relative; overflow: hidden; }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero::before { /* faint blueprint grid, faded at the edges */
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+    }
+    .hero::after { /* soft cyan bloom behind the board */
+      content: ""; position: absolute; z-index: 0; pointer-events: none;
+      right: 8%; top: 42%; width: 520px; height: 520px; transform: translateY(-50%);
+      background: radial-gradient(circle, rgba(0,180,216,.12), transparent 70%);
+      filter: blur(20px);
+    }
+    [data-theme="light"] .hero::before {
+      background-image:
+        linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
+    }
+    [data-theme="light"] .hero::after {
+      background: radial-gradient(circle, rgba(0,119,138,.08), transparent 70%);
+    }
+
+
+    .hero-specs {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-3);
+      letter-spacing: 0.05em;
+      margin-top: 1.5rem;
+      opacity: 0.7;
+    }
+
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -973,7 +1010,8 @@
         </a>
         <a href="#get-started" class="btn btn-secondary">Get Started →</a>
       </div>
-    </div>
+
+      <p class="hero-specs">nRF9151 · Cortex-M33 · 256 KB · LTE-M / NB-IoT · mikroBUS™ · CERN-OHL-P</p>    </div>
     <div class="hero-visual">
       <div class="board-frame" id="boardFrame">
         <svg class="pcb-placeholder" viewBox="0 0 560 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Seven PCB board illustration">
