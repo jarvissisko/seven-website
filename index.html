@@ -781,6 +781,21 @@
     }
 
     /* ─── Responsive ─────────────────────────────────────────────────── */
+    
+    /* Light mode SVG illustrations */
+    [data-theme="light"] .pcb-placeholder {
+      filter: invert(0.9) hue-rotate(160deg) saturate(2) brightness(0.95) contrast(1.2);
+    }
+    [data-theme="light"] .mikrobus-diagram {
+      filter: invert(0.9) hue-rotate(160deg) saturate(2) brightness(0.95) contrast(1.2);
+    }
+    [data-theme="light"] .board-frame {
+      background: transparent;
+    }
+    [data-theme="light"] .hw-board-frame {
+      background: transparent;
+    }
+
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
