@@ -205,10 +205,14 @@
       display: grid;
       font: 0.7rem var(--mono);
       color: var(--text-3);
-      margin-top: 0.25rem;
+      margin-top: -6px;
+      padding-left: 24px;
       opacity: 0.6;
       text-align: left;
       white-space: nowrap;
+      width: 100%;
+      max-width: 480px;
+      align-self: center;
     }
     .boot > * { grid-area: 1/1; }
 
@@ -1005,6 +1009,1191 @@
         <a href="#get-started">Get Started</a>
         <a href="#licenses">Open Source</a>
       </div>
+      <div class="nav-right">
+        <a href="https://github.com/id8-engineering/seven-hardware" class="nav-github" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+          GitHub
+        </a>
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle theme">
+          <span id="themeIcon">☀</span>
+        </button>
+        <button class="menu-btn" id="menuToggle" aria-label="Menu" aria-expanded="false" style="display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;padding:0.25rem;">☰</button>
+      </div>
+    </div>
+    <!-- Mobile nav panel -->
+    <div class="nav-mobile" id="mobileNav" style="display:none;flex-direction:column;padding:1rem 1.5rem;gap:0.5rem;background:var(--bg-2);border-bottom:1px solid var(--border);">
+      <a href="#hardware" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Hardware</a>
+      <a href="#software" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Software</a>
+      <a href="#get-started" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Get Started</a>
+      <a href="#licenses" style="color:var(--text-2);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">Open Source</a>
+      <a href="https://github.com/id8-engineering/seven-hardware" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;padding:0.5rem 0;font-size:0.9rem;">GitHub ↗</a>
+      <button id="mobileThemeToggle" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-2);padding:0.5rem;font-size:0.85rem;cursor:pointer;text-align:left;">Toggle theme</button>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ────────────────────────────────────────────────────── -->
+  <section class="hero" id="top">
+    <div class="hero-content">
+      <div class="hero-badge">Open Hardware · LTE-M / NB-IoT</div>
+      <h1 class="hero-title">SEVEN<span class="seven-dot" style="-webkit-text-fill-color:var(--accent);color:var(--accent)">.</span></h1>
+      <p style="font-family:var(--mono);font-size:0.75rem;color:var(--text-3);letter-spacing:0.15em;margin-top:-0.75rem;margin-bottom:1rem;text-transform:uppercase;">by ID8 Engineering</p>
+      <p class="hero-tagline">
+        A compact, open-source rapid-prototyping platform for
+        <strong>LTE cellular IoT</strong> — built on the Nordic nRF9151 SiP,
+        powered by Zephyr RTOS, and designed to get your idea connected fast.
+      </p>
+      <div class="hero-cta">
+        <a href="https://github.com/id8-engineering/seven-hardware" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.071 1.532 1.031 1.532 1.031.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.097-2.646 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.393.1 2.646.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.162 22 16.416 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+          View on GitHub
+        </a>
+        <a href="#get-started" class="btn btn-secondary">Get Started →</a>
+      </div>
+
+      <p class="hero-specs">nRF9151 · Cortex-M33 · 256 KB · LTE-M / NB-IoT · mikroBUS™ · CERN-OHL-P</p>
+
+      
+    </div>
+    <div class="hero-visual">
+      <div class="board-frame" id="boardFrame">
+        <svg class="pcb-placeholder" viewBox="0 0 560 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Seven PCB board illustration">
+          <!-- PCB board -->
+          <rect x="20" y="20" width="520" height="340" rx="6" fill="#0d1a0d" stroke="#2a4a2a" stroke-width="1.5"/>
+
+          <!-- Mounting holes -->
+          <circle cx="40" cy="40" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="40" cy="40" r="3" fill="#0d1a0d" stroke="#2a4a2a" stroke-width="1"/>
+          <circle cx="520" cy="40" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="520" cy="40" r="3" fill="#0d1a0d" stroke="#2a4a2a" stroke-width="1"/>
+          <circle cx="40" cy="340" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="40" cy="340" r="3" fill="#0d1a0d" stroke="#2a4a2a" stroke-width="1"/>
+          <circle cx="520" cy="340" r="6" fill="none" stroke="#1f3a1f" stroke-width="1.5"/>
+          <circle cx="520" cy="340" r="3" fill="#0d1a0d" stroke="#2a4a2a" stroke-width="1"/>
+
+          <!-- === TOP-LEFT: ID8 logo area + CERN-OHL-P === -->
+          <image x="165" y="33" width="80" height="28" href="data:image/png;base64,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" preserveAspectRatio="xMidYMid meet"/>
+          <text x="205" y="72" font-family="monospace" font-size="7" fill="#3a8a3a" text-anchor="middle">CERN-OHL-P v2</text>
+
+          <!-- === LEFT SIDE: mikroBUS 1 (upper) === -->
+          <!-- Pin header row (top of mikroBUS 1) -->
+          <g>
+            <rect x="110" y="90" width="200" height="8" rx="1" fill="#1a2a1a" stroke="#3a6a3a" stroke-width="0.8"/>
+            <rect x="115" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="125" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="135" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="145" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="155" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="165" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="175" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="185" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="195" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="205" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="215" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="225" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="235" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="245" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="255" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+            <rect x="265" y="91" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          </g>
+          <!-- mikroBUS 1 label -->
+          <rect x="145" y="110" width="120" height="70" rx="4" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+          <text x="165" y="150" font-family="monospace" font-size="22" fill="#3a8a3a" font-weight="800">1</text>
+          <text x="220" y="140" font-family="monospace" font-size="8" fill="#4a8a4a">mikro</text>
+          <text x="220" y="155" font-family="monospace" font-size="12" fill="#4a8a4a" font-weight="700">BUS</text>
+
+          <!-- Left side components: debug header, test points -->
+          <rect x="25" y="100" width="20" height="40" rx="2" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="1"/>
+          <text x="35" y="85" font-family="monospace" font-size="7" fill="#3a8a3a" text-anchor="middle">J1</text>
+
+          <!-- LS (left side component - possibly speaker/buzzer) -->
+          <rect x="25" y="175" width="28" height="28" rx="4" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="1"/>
+          <text x="39" y="215" font-family="monospace" font-size="7" fill="#3a8a3a" text-anchor="middle">LS</text>
+
+          <!-- === LEFT SIDE: mikroBUS 2 (lower) === -->
+          <rect x="110" y="210" width="200" height="8" rx="1" fill="#1a2a1a" stroke="#3a6a3a" stroke-width="0.8"/>
+          <rect x="115" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="125" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="135" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="145" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="155" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="165" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="175" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="185" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="195" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="205" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="215" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="225" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="235" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="245" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="255" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+          <rect x="265" y="211" width="6" height="6" rx="0.5" fill="#4a8a4a"/>
+
+          <rect x="145" y="230" width="120" height="70" rx="4" fill="#1e3a1e" stroke="#2a5a2a" stroke-width="1"/>
+          <text x="165" y="270" font-family="monospace" font-size="22" fill="#3a8a3a" font-weight="800">2</text>
+          <text x="220" y="260" font-family="monospace" font-size="8" fill="#4a8a4a">mikro</text>
+          <text x="220" y="275" font-family="monospace" font-size="12" fill="#4a8a4a" font-weight="700">BUS</text>
+
+          <!-- === BOTTOM-LEFT: SIM slot (J7) === -->
+          <rect x="25" y="240" width="65" height="40" rx="3" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="1"/>
+          <rect x="30" y="245" width="55" height="30" rx="2" fill="none" stroke="#3a6a3a" stroke-width="0.7"/>
+          <text x="58" y="295" font-family="monospace" font-size="8" fill="#3a8a3a" text-anchor="middle">SIM · J7</text>
+
+          <!-- === TOP-RIGHT: nRF9151 (U1) === -->
+          <rect x="360" y="45" width="110" height="85" rx="4" fill="#1a1a1a" stroke="#2a4a2a" stroke-width="1.5"/>
+          <text x="415" y="82" font-family="monospace" font-size="13" fill="#5aba5a" text-anchor="middle" font-weight="600">nRF9151</text>
+          <text x="415" y="97" font-family="monospace" font-size="8" fill="#3a8a3a" text-anchor="middle">U1</text>
+          <!-- QFN pads -->
+          <rect x="348" y="55" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="348" y="63" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="348" y="71" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="348" y="79" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="348" y="87" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="348" y="95" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="348" y="103" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="348" y="111" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="470" y="55" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="470" y="63" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="470" y="71" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="470" y="79" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="470" y="87" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="470" y="95" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="470" y="103" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <rect x="470" y="111" width="12" height="3" rx="1" fill="#3a7a3a"/>
+          <!-- IC glow -->
+          <rect x="360" y="45" width="110" height="85" rx="4" fill="none" stroke="#00b4d8" stroke-width="0.5" opacity="0.15"/>
+
+          <!-- Passive components around nRF -->
+          <rect x="340" y="145" width="8" height="4" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="355" y="145" width="8" height="4" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="370" y="145" width="8" height="4" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="385" y="145" width="8" height="4" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="400" y="145" width="8" height="4" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="340" y="155" width="8" height="4" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="355" y="155" width="8" height="4" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+          <rect x="370" y="155" width="8" height="4" rx="1" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.5"/>
+
+          <!-- === RIGHT SIDE: SMA connectors === -->
+          <!-- GNSS (top-right) -->
+          <rect x="505" y="30" width="18" height="30" rx="3" fill="#1a2a1a" stroke="#4a8a4a" stroke-width="1"/>
+          <circle cx="514" cy="45" r="6" fill="none" stroke="#4a8a4a" stroke-width="1"/>
+          <circle cx="514" cy="45" r="2.5" fill="#4a8a4a"/>
+          <text x="498" y="30" font-family="monospace" font-size="8" fill="#3a8a3a" text-anchor="end">GNSS</text>
+
+          <!-- LTE (mid-right) -->
+          <rect x="505" y="155" width="18" height="30" rx="3" fill="#1a2a1a" stroke="#4a8a4a" stroke-width="1"/>
+          <circle cx="514" cy="170" r="6" fill="none" stroke="#4a8a4a" stroke-width="1"/>
+          <circle cx="514" cy="170" r="2.5" fill="#4a8a4a"/>
+          <text x="498" y="175" font-family="monospace" font-size="8" fill="#3a8a3a" text-anchor="end">LTE</text>
+
+          <!-- === RIGHT SIDE: Screw terminal (J5, green) === -->
+          <rect x="495" y="215" width="30" height="60" rx="3" fill="#1a3a1a" stroke="#2a6a2a" stroke-width="1.5"/>
+          <circle cx="510" cy="230" r="5" fill="none" stroke="#3a8a3a" stroke-width="1.5"/>
+          <circle cx="510" cy="245" r="5" fill="none" stroke="#3a8a3a" stroke-width="1.5"/>
+          <circle cx="510" cy="260" r="5" fill="none" stroke="#3a8a3a" stroke-width="1.5"/>
+          <text x="510" y="290" font-family="monospace" font-size="7" fill="#3a8a3a" text-anchor="middle">J5</text>
+
+          <!-- === BOTTOM-RIGHT: Barrel jack + SMA (LTE bottom) === -->
+          <rect x="475" y="310" width="18" height="30" rx="3" fill="#1a2a1a" stroke="#4a8a4a" stroke-width="1"/>
+          <circle cx="484" cy="325" r="6" fill="none" stroke="#4a8a4a" stroke-width="1"/>
+          <circle cx="484" cy="325" r="2.5" fill="#4a8a4a"/>
+
+          <!-- Power regulator area (bottom-right passives) -->
+          <rect x="410" y="250" width="10" height="10" rx="1" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="0.8"/>
+          <rect x="430" y="250" width="10" height="10" rx="1" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="0.8"/>
+          <rect x="410" y="270" width="10" height="10" rx="1" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="0.8"/>
+          <rect x="430" y="270" width="10" height="10" rx="1" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="0.8"/>
+          <rect x="450" y="260" width="14" height="10" rx="1" fill="#1a2a1a" stroke="#2a4a2a" stroke-width="0.8"/>
+
+          <!-- Bottom-right passives cluster -->
+          <rect x="380" y="300" width="6" height="3" rx="0.5" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.4"/>
+          <rect x="390" y="300" width="6" height="3" rx="0.5" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.4"/>
+          <rect x="400" y="300" width="6" height="3" rx="0.5" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.4"/>
+          <rect x="380" y="310" width="6" height="3" rx="0.5" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.4"/>
+          <rect x="390" y="310" width="6" height="3" rx="0.5" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.4"/>
+          <rect x="400" y="310" width="6" height="3" rx="0.5" fill="#2a2a1a" stroke="#3a4a2a" stroke-width="0.4"/>
+
+          <!-- === BOTTOM-CENTER: SEVEN logo === -->
+          <text x="298" y="325" font-family="monospace" font-size="14" fill="#4a8a4a" text-anchor="middle" letter-spacing="2" font-weight="700">SEVEN</text><circle cx="325" cy="324" r="1.5" fill="#00b4d8"/>
+          <text x="300" y="345" font-family="monospace" font-size="9" fill="#3a8a3a" text-anchor="middle" letter-spacing="2">by ID8 Engineering</text>
+        </svg>
+      
+        TYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seven — Open-Source LTE IoT Platform</title>
+  <meta name="description" content="Seven is an open-source rapid-prototyping platform for LTE-M and NB-IoT cellular IoT applications, built around the Nordic nRF9151 SiP.">
+  <meta property="og:title" content="Seven — Open-Source LTE IoT Platform">
+  <meta property="og:description" content="A compact, open hardware platform for LTE cellular IoT. Built on nRF9151 + Zephyr RTOS. By ID8 Engineering.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:           #050907;
+      --bg-1:         #090f0b;
+      --bg-2:         #0d1510;
+      --bg-3:         #131c16;
+      --border:       #1e1e1e;
+      --border-2:     #272727;
+      --text:         #f0f0f0;
+      --text-2:       #a0a0a0;
+      --text-3:       #8c8c8c;
+      --accent:       #00b4d8;
+      --accent-dim:   #0090b0;
+      --accent-glow:  rgba(0, 180, 216, 0.12);
+      --accent-glow2: rgba(0, 180, 216, 0.06);
+      --green:        #22c55e;
+      --font:         'Inter', system-ui, -apple-system, sans-serif;
+      --mono:         'JetBrains Mono', 'Courier New', monospace;
+      --radius:       10px;
+      --radius-sm:    6px;
+      --nav-h:        60px;
+      --max-w:        1100px;
+    }
+
+    [data-theme="light"] {
+      --bg:           #f8f9fa;
+      --bg-1:         #ffffff;
+      --bg-2:         #f0f1f2;
+      --bg-3:         #e8e9eb;
+      --border:       #e2e3e5;
+      --border-2:     #d5d6d8;
+      --text:         #0f0f0f;
+      --text-2:       #404040;
+      --text-3:       #5a5a5a;
+      --accent:       #00778a;
+      --accent-dim:   #005f70;
+      --accent-glow:  rgba(0, 119, 138, 0.1);
+      --accent-glow2: rgba(0, 119, 138, 0.05);
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+    overflow-x: hidden;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ─── Navigation ─────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(5, 9, 7, 0.85);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    [data-theme="light"] .nav { background: rgba(248, 249, 250, 0.9); }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      flex: 1;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-2);
+      padding: 0.4rem 0.75rem;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg-3); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-left: auto;
+    }
+    .nav-github {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-2);
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+    .nav-github:hover { color: var(--text); border-color: var(--accent); }
+    .nav-github svg { width: 16px; height: 16px; }
+
+    .theme-btn {
+      background: none;
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--text-2);
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+    .theme-btn:hover { color: var(--text); border-color: var(--accent); }
+
+    /* ─── Hero ───────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      padding: calc(var(--nav-h) + 5rem) 1.5rem 5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero { position: relative; overflow: hidden; }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero::before { /* faint blueprint grid, faded at the edges */
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+    }
+    .hero::after { /* soft cyan bloom behind the board */
+      content: ""; position: absolute; z-index: 0; pointer-events: none;
+      right: 8%; top: 42%; width: 520px; height: 520px; transform: translateY(-50%);
+      background: radial-gradient(circle, rgba(40,170,95,.10), transparent 70%);
+      filter: blur(20px);
+    }
+    [data-theme="light"] .hero::before {
+      background-image:
+        linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px);
+    }
+    [data-theme="light"] .hero::after {
+      background: radial-gradient(circle, rgba(0,119,138,.08), transparent 70%);
+    }
+
+
+    .hero-specs {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-3);
+      letter-spacing: 0.05em;
+      margin-top: 1.5rem;
+      opacity: 0.7;
+    }
+
+
+    /* ─── Boot sequence ─────────────────────────────────────────────── */
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(0, 180, 216, 0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+    .hero-title {
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    [data-theme="light"] .hero-title {
+      background: linear-gradient(135deg, #0f0f0f 0%, rgba(0,0,0,0.6) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      max-width: 44ch;
+    }
+    .hero-tagline strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+    .btn-primary:hover { background: #00ccf0; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,180,216,0.3); }
+    .btn-secondary {
+      background: var(--bg-3);
+      color: var(--text);
+      border: 1px solid var(--border-2);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Board image */
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .board-frame {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 16px;
+      overflow: visible;
+      border: none;
+      background: transparent;
+      padding: 20px;
+    }
+    .board-frame img,
+    .board-frame svg {
+      width: 100%; height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)) drop-shadow(0 0 60px rgba(0,180,216,0.06));
+    }
+    .board-frame.no-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* PCB placeholder SVG */
+    .pcb-placeholder {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ─── Specs Strip ─────────────────────────────────────────────────── */
+    .specs-strip {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 1.5rem;
+    }
+    .specs-strip-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      justify-content: space-between;
+    }
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.5rem 1.5rem;
+      border-right: 1px solid var(--border);
+    }
+    .spec-item:first-child { padding-left: 0; }
+    .spec-item:last-child { border-right: none; }
+    .spec-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+    }
+    .spec-value {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+      font-family: var(--mono);
+    }
+
+    /* ─── Sections ───────────────────────────────────────────────────── */
+    section {
+      padding: 6rem 1.5rem;
+    }
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    section {
+      overflow: hidden;
+    }
+    .hero {
+      overflow: visible;
+    }
+    #hardware {
+      overflow: visible;
+    }
+    #hardware .section-inner {
+      overflow: visible;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text-2);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── Overview ───────────────────────────────────────────────────── */
+    #overview {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 100%);
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .overview-card {
+      overflow: hidden;
+      background: var(--bg-1);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+    .overview-card:hover { background: var(--bg-2); }
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: 1px solid rgba(0,180,216,0.25);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--accent);
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .card-body {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ─── Hardware ───────────────────────────────────────────────────── */
+    #hardware {
+      background: var(--bg-1);
+    }
+    .hw-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .spec-table tbody tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .spec-table tbody tr:last-child { border-bottom: none; }
+    .spec-table td {
+      padding: 0.8rem 0;
+      font-size: 0.875rem;
+    }
+    .spec-table td:first-child {
+      color: var(--text-3);
+      font-weight: 500;
+      width: 45%;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .spec-table td:last-child {
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    .hw-image-col {
+      position: static;
+    }
+    .hw-board-frame {
+      border-radius: var(--radius);
+      overflow: visible;
+      border: none;
+      background: transparent;
+      margin-bottom: 1.5rem;
+      padding: 20px;
+    }
+    .hw-board-frame img {
+      width: 100%; height: auto;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)) drop-shadow(0 0 60px rgba(0,180,216,0.06));
+      object-fit: cover;
+    }
+    .github-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+    .github-link:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+    .github-link-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .github-link-content { flex: 1; }
+    .github-link-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .github-link-sub {
+      font-size: 0.78rem;
+      color: var(--text-3);
+      font-family: var(--mono);
+    }
+    .github-link-arrow {
+      color: var(--text-3);
+      font-size: 1rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .github-link:hover .github-link-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ─── Software ───────────────────────────────────────────────────── */
+    #software {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 100%);
+    }
+    .sw-grid {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .sw-card {
+      overflow: hidden;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sw-card:hover {
+      border-color: var(--accent);
+      background: var(--bg-3);
+    }
+    .sw-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .sw-icon {
+      width: 38px; height: 38px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: 1px solid rgba(0,180,216,0.25);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .sw-card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .sw-card-sub {
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+    .sw-card-body {
+      font-size: 0.84rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+    .sw-tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .sw-tag {
+      font-size: 0.7rem;
+      font-family: var(--mono);
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(0,180,216,0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    /* ─── Expansion ─────────────────────────────────────────────────── */
+    #expansion {
+      background: var(--bg-1);
+    }
+    .expansion-layout {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .expansion-visual {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .mikrobus-diagram {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .click-examples {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .click-chip {
+      padding: 0.6rem 0.75rem;
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-align: center;
+    }
+    .expansion-content .section-sub { margin-bottom: 1.75rem; }
+
+    .pin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+    .pin-table th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+      border-bottom: 1px solid var(--border-2);
+    }
+    .pin-table td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-2);
+    }
+    .pin-table td:first-child {
+      font-family: var(--mono);
+      color: var(--accent);
+      font-size: 0.78rem;
+    }
+    .pin-table tr:last-child td { border-bottom: none; }
+
+    /* ─── Get Started ────────────────────────────────────────────────── */
+    #get-started {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 50%);
+    }
+    .gs-steps {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .gs-step {
+      overflow: hidden;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      position: relative;
+    }
+    .gs-step-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--border-2);
+      line-height: 1;
+      margin-bottom: 1rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .gs-step-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .gs-step-body {
+      font-size: 0.84rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+    .gs-step-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .code-block {
+      word-break: break-all;
+      white-space: pre-wrap;
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text-2);
+      margin-top: 0.75rem;
+      overflow-x: auto;
+    }
+    .code-block .cmd { color: var(--accent); }
+    .code-block .cmt { color: var(--text-3); }
+
+    .gs-note {
+      background: rgba(0,180,216,0.06);
+      border: 1px solid rgba(0,180,216,0.2);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      font-size: 0.875rem;
+      color: var(--text-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .gs-note-icon { color: var(--accent); font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+    /* ─── Licenses ───────────────────────────────────────────────────── */
+    #licenses {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+    }
+    .license-grid {
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .license-card {
+      overflow: hidden;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    .license-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(0,180,216,0.25);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .license-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .license-body {
+      font-size: 0.84rem;
+      color: var(--text-2);
+      line-height: 1.65;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+    }
+    .footer-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .footer-sub {
+      font-size: 0.78rem;
+      color: var(--text-3);
+    }
+    .footer-sub a { color: var(--text-2); }
+    .footer-sub a:hover { color: var(--accent); }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ─── Dividers / Utilities ───────────────────────────────────────── */
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-family: var(--mono);
+      color: var(--green);
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────────── */
+    
+    /* Light mode SVG illustrations */
+    [data-theme="light"] .pcb-placeholder {
+      filter: invert(0.9) hue-rotate(160deg) saturate(2) brightness(0.95) contrast(1.2) drop-shadow(0 20px 40px rgba(0,0,0,0.2));
+    }
+    [data-theme="light"] .mikrobus-diagram {
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)) invert(0.9) hue-rotate(160deg) saturate(2) brightness(0.95) contrast(1.2);
+    }
+    [data-theme="light"] .board-frame {
+      background: transparent;
+    }
+    [data-theme="light"] .hw-board-frame {
+      background: transparent;
+    }
+
+
+    /* ─── Connectivity heartbeat ────────────────────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      .seven-dot,
+      .led-status { animation: pulse 2.4s ease-in-out infinite; }
+      .led-lte { animation: pulse 2.4s ease-in-out infinite .6s; position: relative; }
+      .seven-dot { animation-delay: .3s; }
+      .led-lte::after {
+        content: ""; position: absolute; inset: 0; border-radius: 50%;
+        box-shadow: 0 0 0 1px var(--accent);
+        animation: signal 3s ease-out infinite;
+      }
+    }
+    @keyframes pulse { 0%,100% { opacity: .45 } 50% { opacity: 1 } }
+    @keyframes signal { 0% { transform: scale(.6); opacity: .55 } 100% { transform: scale(2.6); opacity: 0 } }
+
+    /* ─── Tablet landscape (≤1024px) ──────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-inner { gap: 2.5rem; }
+      .hero-title { font-size: clamp(3.5rem, 8vw, 5rem); }
+      .hero-tagline { font-size: 1rem; }
+      .sw-grid { grid-template-columns: repeat(2, 1fr); }
+      .expansion-layout { gap: 2.5rem; }
+    }
+
+    /* ─── Tablet portrait (≤768px) ─────────────────────────────────── */
+    @media (max-width: 768px) {
+      /* Nav → hamburger */
+      .nav-links { display: none !important; }
+      .nav-right .theme-btn { display: none; }
+      .nav-right .nav-github { display: none; }
+      #menuToggle { display: flex !important; }
+      .nav-mobile.open { display: flex !important; }
+
+      /* Hero: text first, image second — stack vertically */
+      .hero {
+        grid-template-columns: 1fr !important;
+        min-height: auto !important;
+        gap: 1.5rem;
+        padding-top: calc(var(--nav-h) + 1.5rem);
+        padding-bottom: 1.5rem;
+      }
+      .hero-visual { order: 1; width: 100%; display: flex; justify-content: center; }
+      .hero-content { order: 0; }
+      .board-frame { max-width: 340px; margin: 0 auto; }
+      .hero-title { font-size: clamp(3rem, 10vw, 4rem); }
+      .hero-tagline { font-size: 0.95rem; max-width: none; margin-bottom: 1.5rem; }
+      .hero-cta { flex-direction: column; gap: 0.75rem; }
+      .hero-cta .btn { width: 100%; justify-content: center; }
+
+      /* Sections */
+      section { padding: 3.5rem 1.25rem; }
+      .section-title { font-size: 1.8rem; }
+
+      /* Grids → single/dual column */
+      .overview-grid { grid-template-columns: 1fr; }
+      .sw-grid { grid-template-columns: 1fr; }
+      .expansion-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .gs-steps { grid-template-columns: 1fr; }
+      .license-grid { grid-template-columns: 1fr; }
+
+      /* Hardware */
+      .hw-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .hw-image-col { position: static; }
+
+      /* Specs strip */
+      .specs-strip { padding: 1.25rem; }
+      .specs-strip-inner {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+      }
+      .spec-item { 
+        border-right: none; 
+        border-bottom: 1px solid var(--border); 
+        padding: 0.75rem 0.5rem; 
+      }
+      .spec-item:nth-child(3n) { border-right: none; }
+      .spec-item:last-child { border-bottom: none; }
+
+      /* Footer */
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .footer-links { flex-wrap: wrap; gap: 0.5rem 1rem; font-size: 0.8rem; }
+      footer { padding: 1.5rem 1.25rem; }
+    }
+
+    /* ─── Mobile (≤480px) ──────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .hero-inner { padding: 1.5rem 1rem; gap: 1.75rem; }
+      .hero-title { font-size: 2.75rem; }
+      .hero-tagline { font-size: 0.9rem; }
+      .board-frame { max-width: 280px; }
+      .board-frame img { max-width: 100%; height: auto; }
+      .hero-cta .btn { font-size: 0.8rem; padding: 0.7rem 1rem; }
+
+      section { padding: 3rem 1rem; }
+      .section-title { font-size: 1.5rem; }
+      .section-sub { font-size: 0.9rem; }
+
+      /* Specs strip → 2 columns */
+      .specs-strip-inner { grid-template-columns: repeat(2, 1fr); }
+
+      /* Code blocks */
+      .code-block { font-size: 0.75rem; padding: 0.75rem; }
+
+      /* Footer */
+      .footer-inner { padding: 0 1rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────────────────────── -->
+  <nav class="nav" role="navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">SEVEN<span style="color:var(--accent)">.</span></a>
+      <div class="nav-links">
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#get-started">Get Started</a>
+        <a href="#licenses">Open Source</a>
+      </div>
+      
       <div class="nav-right">
         <a href="https://github.com/id8-engineering/seven-hardware" class="nav-github" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
