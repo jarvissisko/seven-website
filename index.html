@@ -1066,7 +1066,7 @@
       
         <div class="boot" id="bootStrip">
         <span class="connecting">Connecting<span class="dot">…</span></span>
-        <span class="online">LTE-M <span class="telemetry">· <span class="rf-cycle" data-values="-97,-90,-87" data-suffix=" dBm">−87 dBm</span></span>&nbsp;&nbsp;GPS lock <span class="telemetry">· <span class="rf-cycle" data-values="3,5,7" data-suffix=" sats">7 sats</span></span>&nbsp;&nbsp;<span class="live"><span class="dot">●</span> online</span></span>
+        <span class="online">LTE-M <span class="telemetry">· <span class="rf-cycle" data-values="-97,-90,-87" data-suffix=" dBm"></span></span>&nbsp;&nbsp;GPS lock <span class="telemetry">· <span class="rf-cycle" data-values="3,5,7" data-suffix=" sats"></span></span>&nbsp;&nbsp;<span class="live"><span class="dot">●</span> online</span></span>
       </div>
       </div>
       
@@ -1504,7 +1504,8 @@
       document.querySelectorAll('.rf-cycle').forEach(el => {
         const values = el.dataset.values.split(',');
         const suffix = el.dataset.suffix;
-        let i = 0;
+        el.textContent = values[0] + suffix;
+        let i = 1;
         const interval = setInterval(() => {
           el.textContent = values[i] + suffix;
           i++;
