@@ -1278,34 +1278,34 @@
           <div class="gs-step-num">01</div>
           <h3 class="gs-step-title">Set up the SDK</h3>
           <p class="gs-step-body">
-            Install the <a href="https://www.nordicsemi.com/Products/Development-software/nRF-Connect-SDK" target="_blank" rel="noopener">nRF Connect SDK</a> using the
-            <a href="https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop" target="_blank" rel="noopener">nRF Connect for Desktop</a> toolchain manager.
-            Installs Zephyr, west, and all required toolchains.
+            Install <a href="https://docs.nordicsemi.com/bundle/nrfutil/page/guides/installing.html" target="_blank" rel="noopener">nRF Util</a>, then install nRF Connect SDK v3.2.1 and launch the toolchain shell.
           </p>
-          <div class="code-block"><span class="cmd">west init -m https://github.com/nrfconnect/sdk-nrf</span>
-<span class="cmd">west update</span></div>
+          <div class="code-block"><span class="cmd">nrfutil install sdk-manager</span>
+<span class="cmd">nrfutil sdk-manager install v3.2.1</span>
+<span class="cmd">nrfutil sdk-manager toolchain launch --ncs-version v3.2.1 --shell</span></div>
         </div>
 
         <div class="gs-step fade-up">
           <div class="gs-step-num">02</div>
-          <h3 class="gs-step-title">Clone board files</h3>
+          <h3 class="gs-step-title">Set up workspace</h3>
           <p class="gs-step-body">
-            The Seven board definition and DTS files live in the hardware repository.
-            Clone it and point your west workspace at the out-of-tree board definition.
+            Initialize a west workspace from the Seven firmware samples repository and fetch all sources.
           </p>
-          <div class="code-block"><span class="cmd">git clone https://github.com/id8-engineering/seven-hardware</span>
-<span class="cmt"># Add to west.yml or use BOARD_ROOT</span></div>
+          <div class="code-block"><span class="cmd">mkdir -p ~/src/seven-firmware-samples-workspace && cd ~/src/seven-firmware-samples-workspace</span>
+<span class="cmd">west init -m https://github.com/id8-engineering/seven-firmware-samples --mr main .</span>
+<span class="cmd">cd seven-firmware-samples && west update</span></div>
         </div>
 
         <div class="gs-step fade-up">
           <div class="gs-step-num">03</div>
           <h3 class="gs-step-title">Build &amp; flash</h3>
           <p class="gs-step-body">
-            Build the included <code style="font-family: var(--mono); font-size: 0.8em; color: var(--accent)">asset_tracker</code> sample or start from a minimal hello_nrf9151 application.
-            Flash via USB-C with the nRF Connect Programmer.
+            Build a sample application and flash it to the board via <a href="https://shop.segger.com/debug-trace-probes/debug-probes/j-link/j-link-plus-compact" target="_blank" rel="noopener">J-Link</a>.
           </p>
-          <div class="code-block"><span class="cmd">west build -b seven_nrf9151 -- -DEXTRA_CONF_FILE=overlay-lte.conf</span>
-<span class="cmd">west flash</span></div>
+          <div class="code-block"><span class="cmd">make sample-hello-world</span>
+<span class="cmd">west flash</span>
+<span class="cmd">west rtt</span>
+<span class="cmt"># Hello World! seven/nrf9151</span></div>
         </div>
       </div>
 
