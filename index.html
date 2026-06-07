@@ -875,6 +875,12 @@
     /* ─── Responsive ─────────────────────────────────────────────────── */
     
     /* Light mode SVG illustrations */
+    
+    .pcb-light { display: none !important; }
+    .pcb-dark { display: block !important; }
+    [data-theme="light"] .pcb-light { display: block !important; }
+    [data-theme="light"] .pcb-dark { display: none !important; }
+
     [data-theme="light"] .pcb-placeholder {
       filter: none;
     }
@@ -1074,7 +1080,8 @@
     </div>
     <div class="hero-visual">
       <div class="board-frame" id="boardFrame">
-        <img src="hero-board.png" alt="Seven nRF9151 board illustration" class="pcb-placeholder" style="width:100%;height:auto;">
+        <img src="hero-board.png" alt="Seven nRF9151 board illustration" class="pcb-placeholder pcb-dark" style="width:100%;height:auto;">
+        <img src="hero-board-light.png" alt="Seven nRF9151 board illustration" class="pcb-placeholder pcb-light" style="width:100%;height:auto;display:none;">
       
         <div class="boot" id="bootStrip">
         <span class="connecting">Connecting<span class="dot">…</span></span>
