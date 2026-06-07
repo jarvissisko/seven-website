@@ -1066,7 +1066,7 @@
       
         <div class="boot" id="bootStrip">
         <span class="connecting">Connecting<span class="dot">…</span></span>
-        <span class="online">LTE-M <span class="telemetry">· −87 dBm</span>&nbsp;&nbsp;GPS lock <span class="telemetry">· 7 sats</span>&nbsp;&nbsp;<span class="live"><span class="dot">●</span> online</span></span>
+        <span class="online">LTE-M <span class="telemetry">· <span class="rf-cycle" data-values="-97,-90,-87" data-suffix=" dBm">−87 dBm</span></span>&nbsp;&nbsp;GPS lock <span class="telemetry">· <span class="rf-cycle" data-values="3,5,7" data-suffix=" sats">7 sats</span></span>&nbsp;&nbsp;<span class="live"><span class="dot">●</span> online</span></span>
       </div>
       </div>
       
@@ -1496,6 +1496,37 @@
         });
       }, { threshold: 0.5 });
       bootObserver.observe(bootStrip);
+    }
+
+
+    // ── RF telemetry cycling — values flash before settling ──────
+    function cycleValues() {
+      document.querySelectorAll('.rf-cycle').forEach(el => {
+        const values = el.dataset.values.split(',');
+        const suffix = el.dataset.suffix;
+        let i = 0;
+        const interval = setInterval(() => {
+          el.textContent = values[i] + suffix;
+          i++;
+          if (i >= values.length) {
+            clearInterval(interval);
+          }
+        }, 1000);
+      });
+    }
+
+    // Fire the cycling after boot sequence reaches the online state (~2.8s)
+    const bootEl = document.getElementById('bootStrip');
+    if (bootEl) {
+      const cycleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(cycleValues, 2000);
+            cycleObserver.unobserve(bootEl);
+          }
+        });
+      }, { threshold: 0.5 });
+      cycleObserver.observe(bootEl);
     }
   </script>
 
