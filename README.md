@@ -6,7 +6,7 @@ Product website for the [Seven](https://github.com/id8-engineering/seven-hardwar
 
 ## What this is
 
-Single-page static site — one `index.html`, no build step, no dependencies. Covers hardware specs, software stack, getting started guide, and open-source licensing.
+Single-page static site — no build step, no dependencies. HTML, CSS, and JS are split into separate files for maintainability. Covers hardware specs, software stack, getting started guide, and open-source licensing.
 
 ## Structure
 

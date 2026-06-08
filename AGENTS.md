@@ -2,11 +2,16 @@
 
 ## What this repo is
 
-Static product website for the Seven IoT board. One `index.html`, no framework, no build step.
+Static product website for the Seven IoT board. No framework, no build step.
+
+- `index.html` — page structure (HTML only)
+- `css/style.css` — all styles, organized by section comments
+- `js/main.js` — theme toggle, scroll animations, boot sequence
+- `assets/` — images, logos, favicon
 
 ## Rules
 
-1. **Keep it static.** No bundlers, no transpilers, no `node_modules`. If you need JavaScript, inline it or add a `<script>` tag. The build step is `open index.html`.
+1. **Keep it static.** No bundlers, no transpilers, no `node_modules`. CSS lives in `css/`, JS in `js/`, images in `assets/`. The build step is `open index.html`.
 
 2. **Content stays in sync with upstream.** Hardware specs come from [seven-hardware](https://github.com/id8-engineering/seven-hardware), getting-started instructions from [seven-firmware-samples](https://github.com/id8-engineering/seven-firmware-samples). Don't invent specs — verify against source.
 
