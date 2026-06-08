@@ -2,7 +2,7 @@
 
 Product website for the [Seven](https://github.com/id8-engineering/seven-hardware) IoT prototyping board by ID8 Engineering.
 
-**Live:** [seven.id8-engineering.io](https://seven.id8-engineering.io) *(Cloudflare Pages)*
+**Live:** [seven-website.pages.dev](https://seven-website.pages.dev/) *(Cloudflare Pages)*
 
 ## What this is
 
