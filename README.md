@@ -2,7 +2,7 @@
 
 Product website for the [Seven](https://github.com/id8-engineering/seven-hardware) IoT prototyping board by ID8 Engineering.
 
-**Live:** [seven.id8-engineering.io](https://seven.id8-engineering.io) *(GitHub Pages)*
+**Live:** [seven.id8-engineering.io](https://seven.id8-engineering.io) *(Cloudflare Pages)*
 
 ## What this is
 
@@ -49,7 +49,7 @@ If the upstream repos change (SDK version bump, new board revision, etc.), updat
 
 ## Deployment
 
-Hosted on GitHub Pages from the `master` branch root. Push to `master` and it's live.
+Hosted on Cloudflare Pages. Push to `master` and it deploys automatically.
 
 ```bash
 git push origin master

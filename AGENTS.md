@@ -31,4 +31,4 @@ Open at `localhost:8000`. Check both themes, check mobile viewport (DevTools →
 
 ## Deployment
 
-Push to `master`. GitHub Pages deploys automatically from root.
+Push to `master`. Cloudflare Pages deploys automatically.
