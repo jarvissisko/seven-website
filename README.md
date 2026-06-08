@@ -11,15 +11,17 @@ Single-page static site — one `index.html`, no build step, no dependencies. Co
 ## Structure
 
 ```
-index.html          — the entire site
-favicon.svg         — SVG favicon
-hero-board.png      — board photo (dark theme)
+index.html            — page structure (HTML only)
+css/style.css        — all styles, organized by section
+js/main.js           — theme toggle, scroll animations, boot sequence
+favicon.svg          — SVG favicon
+hero-board.png       — board photo (dark theme)
 hero-board-light.png — board photo (light theme)
-seven_board.jpg     — board photo (alternate angle)
-seven_photo.png     — high-res board photo
-id8-logo.png        — ID8 logo
-id8-horizontal.png  — ID8 horizontal logo
-screenshots/        — reference screenshots
+seven_board.jpg      — board photo (alternate angle)
+seven_photo.png      — high-res board photo
+id8-logo.png         — ID8 logo
+id8-horizontal.png   — ID8 horizontal logo
+screenshots/         — reference screenshots
 ```
 
 ## Development
