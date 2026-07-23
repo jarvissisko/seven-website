@@ -22,6 +22,7 @@
   --button-hover: #54d889;
   --button-text:  #101e19;
   --green:        #28c56c;
+  --seven-dot-off: #15432b;
   --font:         'Inter', system-ui, -apple-system, sans-serif;
   --mono:         'JetBrains Mono', 'Courier New', monospace;
   --radius:       10px;
@@ -892,14 +893,25 @@ footer {
 
 /* ─── Connectivity heartbeat ────────────────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
-  .seven-dot,
+  .seven-dot { animation: sevenBlink 1.4s steps(1, end) infinite; }
   .led-status { animation: pulse 2.4s ease-in-out infinite; }
   .led-lte { animation: pulse 2.4s ease-in-out infinite .6s; position: relative; }
-  .seven-dot { animation-delay: .3s; }
   .led-lte::after {
     content: ""; position: absolute; inset: 0; border-radius: 50%;
     box-shadow: 0 0 0 1px var(--accent);
     animation: signal 3s ease-out infinite;
+  }
+}
+@keyframes sevenBlink {
+  0%, 55% {
+    opacity: 1;
+    color: var(--accent);
+    -webkit-text-fill-color: var(--accent);
+  }
+  56%, 100% {
+    opacity: 1;
+    color: var(--seven-dot-off);
+    -webkit-text-fill-color: var(--seven-dot-off);
   }
 }
 @keyframes pulse { 0%,100% { opacity: .45 } 50% { opacity: 1 } }
